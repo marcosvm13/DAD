@@ -39,8 +39,8 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 
 ### Equipo:
 
-- Marcos Vázquez Martín
+- Marcos Vázquez Martín (m.vazquezm.2017@alumnos.urjc.es / https://github.com/marcosvm13)
 
-- David Payán Cabral
+- David Payán Cabral (d.payan.2017@alumnos.urjc.es / https://github.com/dpc99)
 
 - David Calderón Casarrubios (d.calderonc.2016@alumnos.urjc.es / https://github.com/calderon95)
