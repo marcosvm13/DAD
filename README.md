@@ -37,7 +37,7 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 - Cuando un usuario haga una reserva en uno de los hoteles se le mandará un correo con la información de la reserva que ha hecho.
 
 
-Equipo:
+### Equipo:
 
 - Marcos Vázquez Martín
 
