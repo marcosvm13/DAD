@@ -1,4 +1,4 @@
-# DAD_HOTELO
+# HOTELO
 
 # Descripción de la web:
 
