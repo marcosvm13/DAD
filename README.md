@@ -6,15 +6,15 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 
 # Entidades:
 
-- Huésped: Contiene la información de los huéspedes (Nombre y Apellidos del huésped, Contraseña, Telefono y Correo electrónico).
+- **Huésped**: Contiene la información de los huéspedes (Nombre y Apellidos del huésped, Contraseña, Telefono y Correo electrónico).
 
-- Hotel: En él se encuentra la información del hotel (Nombre, Dirección, Número de habitaciones, Número de reservas y Actividades que se hagan en el hotel).
+- **Hotel**: En él se encuentra la información del hotel (Nombre, Dirección, Número de habitaciones, Número de reservas y Actividades que se hagan en el hotel).
 
-- Reserva: Contiene los datos de la reserva (Número de la reserva, Nombre del huésped, Nombre del hotel, Fecha de entrada, Fecha de salida).
+- **Reserva**: Contiene los datos de la reserva (Número de la reserva, Nombre del huésped, Nombre del hotel, Fecha de entrada, Fecha de salida).
 
-- Habitación: Datos de la habitación (Nombre del hotel, Tipo de habitación, Tamaño de habitación, Servicios de la habitación).
+- **Habitación**: Datos de la habitación (Nombre del hotel, Tipo de habitación, Tamaño de habitación, Servicios de la habitación).
 
-- Actividades: Contiene la información de las actividades que se pueden hacer en un hotel (Nombre de la actividad, Descripción de la actividad, Número de plazas).
+- **Actividades**: Contiene la información de las actividades que se pueden hacer en un hotel (Nombre de la actividad, Descripción de la actividad, Número de plazas).
 
 # Parte pública de la aplicación web:
 
