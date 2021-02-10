@@ -39,7 +39,7 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 
 ### Equipo:
 
-- Marcos Vázquez Martín
+- Marcos Vázquez Martín (marcosvm13@hotmail.com / m.vazquezm.2017@alumnos.urjc.es
 
 - David Payán Cabral
 
