@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HotelController {
 
-	/*
 	@GetMapping("/")
 	public String greeting() {
 		
-		return "";
+		return "index";
 	}
-	 */
-	
+
 }
