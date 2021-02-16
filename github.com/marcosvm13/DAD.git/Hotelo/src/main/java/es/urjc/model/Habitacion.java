@@ -25,7 +25,6 @@ public class Habitacion {
 	 * Tamayo
 	 * Imagenes
 	 * Servicios
-	 * huespedes
 	 */
 
 	private int numero;

@@ -12,8 +12,8 @@ public class ServicioHabitacion extends Actividad{
 	@ManyToMany
 	private List<Habitacion> habitacion;
 	
-	public ServicioHabitacion(String nombre, String descripcion, int plazas, List<Habitacion> habitacion) {
-		super(nombre, descripcion, plazas);
+	public ServicioHabitacion(String nombreServicio, String descripcion, int plazas, List<Habitacion> habitacion) {
+		super(nombreServicio, descripcion, plazas);
 		this.habitacion = habitacion;
 	}
 

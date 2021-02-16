@@ -23,7 +23,7 @@ public class Hotel {
 	 * actividades
 	 */
 	
-	private String nombre;
+	private String nombreHotel;
 	
 	private String direccion;
 	
@@ -33,10 +33,10 @@ public class Hotel {
 	@ManyToMany(mappedBy="hotel")
 	private List<ActividadHotel> actividades;
 
-	public Hotel(String nombre, String direccion, List<Habitacion> habitaciones,
+	public Hotel(String nombreHotel, String direccion, List<Habitacion> habitaciones,
 			List<ActividadHotel> actividades) {
 		super();
-		this.nombre = nombre;
+		this.nombreHotel = nombreHotel;
 		this.direccion = direccion;
 		this.habitaciones = habitaciones;
 		this.actividades = actividades;
@@ -46,12 +46,12 @@ public class Hotel {
 		return id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombreHotel() {
+		return nombreHotel;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreHotel(String nombreHotel) {
+		this.nombreHotel = nombreHotel;
 	}
 
 	public String getDireccion() {

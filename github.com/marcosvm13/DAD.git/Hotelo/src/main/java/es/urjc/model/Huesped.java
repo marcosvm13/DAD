@@ -25,7 +25,7 @@ public class Huesped {
 	 * Lista de reservas asociadas
 	 */
 	
-	private String nombre;
+	private String nombreHuesped;
 	
 	private String apellidos;
 	
@@ -36,9 +36,9 @@ public class Huesped {
 	@OneToMany(mappedBy="huesped")
 	private List<Reserva> reservas;
 
-	public Huesped(String nombre, String apellidos, long telefono, String correo, List<Reserva> reservas) {
+	public Huesped(String nombreHuesped, String apellidos, long telefono, String correo, List<Reserva> reservas) {
 		super();
-		this.nombre = nombre;
+		this.nombreHuesped = nombreHuesped;
 		this.apellidos = apellidos;
 		this.telefono = telefono;
 		this.correo = correo;
@@ -49,12 +49,12 @@ public class Huesped {
 		return id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombreHuesped() {
+		return nombreHuesped;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreHuesped(String nombreHuesped) {
+		this.nombreHuesped = nombreHuesped;
 	}
 
 	public String getApellidos() {
