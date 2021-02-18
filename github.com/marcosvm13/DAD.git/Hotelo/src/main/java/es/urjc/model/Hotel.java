@@ -33,13 +33,16 @@ public class Hotel {
 	@ManyToMany(mappedBy="hotel")
 	private List<ActividadHotel> actividades;
 
+	private float estrellas;
+
 	public Hotel(String nombreHotel, String direccion, List<Habitacion> habitaciones,
-			List<ActividadHotel> actividades) {
+			List<ActividadHotel> actividades, float estrellas) {
 		super();
 		this.nombreHotel = nombreHotel;
 		this.direccion = direccion;
 		this.habitaciones = habitaciones;
 		this.actividades = actividades;
+		this.estrellas = estrellas;
 	}
 
 	public long getId() {
@@ -76,6 +79,14 @@ public class Hotel {
 
 	public void setActividades(List<ActividadHotel> actividades) {
 		this.actividades = actividades;
+	}
+	
+	public float getEstrellas() {
+		return estrellas;
+	}
+
+	public void setEstrellas(float estrellas) {
+		this.estrellas = estrellas;
 	}
 	
 }
