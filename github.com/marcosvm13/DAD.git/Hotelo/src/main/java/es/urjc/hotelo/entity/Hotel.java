@@ -1,4 +1,4 @@
-package es.urjc.model;
+package es.urjc.hotelo.entity;
 
 import java.util.List;
 
@@ -28,20 +28,24 @@ public class Hotel {
 	private String direccion;
 	
 	@OneToMany(mappedBy="hotel") 
-	private List<Habitacion> habitaciones;
+	private List<Habitacion> habitacion;
 	
-	@ManyToMany(mappedBy="hotel")
-	private List<ActividadHotel> actividades;
+	@ManyToMany(mappedBy="hoteles")
+	private List<ActividadHotel> actividadHotel;
 
 	private float estrellas;
 
+	public Hotel() {
+		
+	}
+	
 	public Hotel(String nombreHotel, String direccion, List<Habitacion> habitaciones,
 			List<ActividadHotel> actividades, float estrellas) {
 		super();
 		this.nombreHotel = nombreHotel;
 		this.direccion = direccion;
-		this.habitaciones = habitaciones;
-		this.actividades = actividades;
+		this.habitacion = habitaciones;
+		this.actividadHotel = actividades;
 		this.estrellas = estrellas;
 	}
 
@@ -66,19 +70,19 @@ public class Hotel {
 	}
 
 	public List<Habitacion> getHabitaciones() {
-		return habitaciones;
+		return habitacion;
 	}
 
 	public void setHabitaciones(List<Habitacion> habitaciones) {
-		this.habitaciones = habitaciones;
+		this.habitacion = habitaciones;
 	}
 
 	public List<ActividadHotel> getActividades() {
-		return actividades;
+		return actividadHotel;
 	}
 
 	public void setActividades(List<ActividadHotel> actividades) {
-		this.actividades = actividades;
+		this.actividadHotel = actividades;
 	}
 	
 	public float getEstrellas() {

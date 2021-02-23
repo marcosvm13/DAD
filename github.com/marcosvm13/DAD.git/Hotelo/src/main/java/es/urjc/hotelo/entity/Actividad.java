@@ -1,12 +1,14 @@
-package es.urjc.model;
+package es.urjc.hotelo.entity;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+@Entity
 public class Actividad {
 
 	
@@ -27,6 +29,9 @@ public class Actividad {
 	
 	private int plazas;
 	
+	public Actividad() {
+		
+	}
 
 	public Actividad(String nombre, String descripcion, int plazas) {
 		super();

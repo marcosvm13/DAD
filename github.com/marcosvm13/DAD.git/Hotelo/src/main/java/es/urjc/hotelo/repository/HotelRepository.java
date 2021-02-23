@@ -1,12 +1,12 @@
-package es.urjc.repository;
+package es.urjc.hotelo.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.urjc.model.ActividadHotel;
-import es.urjc.model.Habitacion;
-import es.urjc.model.Hotel;
+import es.urjc.hotelo.entity.ActividadHotel;
+import es.urjc.hotelo.entity.Habitacion;
+import es.urjc.hotelo.entity.Hotel;
 
 
 

@@ -1,4 +1,4 @@
-package es.urjc.controllers;
+package es.urjc.hotelo.controller;
 
 import java.util.List;
 
@@ -11,16 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.urjc.model.ActividadHotel;
-import es.urjc.model.Habitacion;
-import es.urjc.model.Hotel;
-import es.urjc.repository.HotelRepository;
+import es.urjc.hotelo.entity.Hotel;
+import es.urjc.hotelo.repository.HotelRepository;
 
 @Controller
 public class HotelController {
 		
-	/*@Autowired
-	 private HotelRepository hoteles ;
+	 @Autowired
+	 private HotelRepository hoteles;
 	
 	 @PostConstruct
 	 public void init() {
@@ -29,14 +27,19 @@ public class HotelController {
 		 hoteles.save(new Hotel( "Tercer hotel", "C/ 9º B", null, null, 3));
 		 hoteles.save(new Hotel( "Cuarto hotel", "C/ asdasdas", null, null, 4 ));
 	 }
-*/
+
 	@GetMapping("/")
 	public String greeting(Model model) {
-		//model.addAttribute("hoteles", hoteles.findAll());
-		model.addAttribute("name", "HOLA");
-		return "principal.html";
+		model.addAttribute("hoteles", hoteles.findAll());
+		//model.addAttribute("name", "HOLA");
+		return "Principal";
 	}
 	
+	/*@GetMapping("/basic")
+	public String basic(Model model) {
+		 model.addAttribute("name","World");
+		 return "prueba";
+	}*/
 	
 	/*@GetMapping("/hotel")
 	public String hotel(@RequestParam long id) {

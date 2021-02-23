@@ -1,13 +1,15 @@
-package es.urjc.model;
+package es.urjc.hotelo.entity;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Huesped {
 
 
@@ -34,7 +36,11 @@ public class Huesped {
 	private String correo;
 
 	@OneToMany(mappedBy="huesped")
-	private List<Reserva> reservas;
+	private List<Reserva> reserva;
+	
+	public Huesped() {
+		
+	}
 
 	public Huesped(String nombreHuesped, String apellidos, long telefono, String correo, List<Reserva> reservas) {
 		super();
@@ -42,7 +48,7 @@ public class Huesped {
 		this.apellidos = apellidos;
 		this.telefono = telefono;
 		this.correo = correo;
-		this.reservas = reservas;
+		this.reserva = reservas;
 	}
 
 	public long getId() {
@@ -82,11 +88,11 @@ public class Huesped {
 	}
 
 	public List<Reserva> getReservas() {
-		return reservas;
+		return reserva;
 	}
 
 	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
+		this.reserva = reservas;
 	}
 	
 	

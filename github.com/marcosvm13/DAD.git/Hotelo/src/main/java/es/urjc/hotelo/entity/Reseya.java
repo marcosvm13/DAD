@@ -1,10 +1,12 @@
-package es.urjc.model;
+package es.urjc.hotelo.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Reseya {
 	
 	/*

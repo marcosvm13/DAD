@@ -1,4 +1,4 @@
-package es.urjc.model;
+package es.urjc.hotelo.entity;
 
 import java.util.List;
 
@@ -36,6 +36,10 @@ public class Reserva {
 	
 	private String fecha;
 	
+	public Reserva() {
+		
+	}
+	
 	public Reserva(Huesped huesped, Habitacion habitacion,  String fecha) {
 		
 
@@ -49,8 +53,6 @@ public class Reserva {
 	public Long getId() {
 		return id;
 	}
-	
-
 	
 	public Huesped getHuesped() {
 		return huesped;

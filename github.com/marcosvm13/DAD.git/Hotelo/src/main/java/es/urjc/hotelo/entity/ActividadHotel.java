@@ -1,9 +1,10 @@
-package es.urjc.model;
+package es.urjc.hotelo.entity;
 
 import java.util.List;
-
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
+@Entity
 public class ActividadHotel extends Actividad{
 	/*
 	 * Clase Que hereda de Actividad que representa las actividades disponibles de un hotel
@@ -13,6 +14,10 @@ public class ActividadHotel extends Actividad{
 	@ManyToMany
 	private List<Hotel> hoteles;
 	
+	public ActividadHotel() {
+		
+	}
+
 	public ActividadHotel(String nombre, String descripcion, int plazas, List<Hotel> hoteles) {
 		super(nombre, descripcion, plazas);
 		this.hoteles = hoteles;

@@ -1,7 +1,8 @@
-package es.urjc.model;
+package es.urjc.hotelo.entity;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
+@Entity
 public class Habitacion {
 
 	@Id
@@ -33,11 +36,11 @@ public class Habitacion {
 	private Hotel hotel;
 	
 	@OneToMany(mappedBy="habitacion")
-	private List<Reserva> reservas;
+	private List<Reserva> reserva;
 	
 	private String tamayo;
 	
-	private List<MultipartFile> imagenes;
+	//private List<MultipartFile> imagenes;
 	
 	@ManyToMany
 	private List<ServicioHabitacion> servicios;
@@ -45,13 +48,17 @@ public class Habitacion {
 	
 	
 	
-	public Habitacion(int numero, Hotel hotel, List<Reserva> reservas, String tamayo, List<MultipartFile> imagenes,
+	public Habitacion() {
+		
+	}
+
+	public Habitacion(int numero, Hotel hotel, List<Reserva> reservas, String tamayo, /*List<MultipartFile> imagenes,*/
 			List<ServicioHabitacion> servicios) {
 		this.numero = numero;
 		this.hotel = hotel;
-		this.reservas = reservas;
+		this.reserva = reservas;
 		this.tamayo = tamayo;
-		this.imagenes = imagenes;
+		//this.imagenes = imagenes;
 		this.servicios = servicios;
 	}
 
@@ -72,11 +79,11 @@ public class Habitacion {
 	}
 
 	public List<Reserva> getReservas() {
-		return reservas;
+		return reserva;
 	}
 
 	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
+		this.reserva = reservas;
 	}
 
 	public String getTamayo() {
@@ -87,13 +94,13 @@ public class Habitacion {
 		this.tamayo = tamayo;
 	}
 
-	public List<MultipartFile> getImagenes() {
+	/*public List<MultipartFile> getImagenes() {
 		return imagenes;
 	}
 
 	public void setImagenes(List<MultipartFile> imagenes) {
 		this.imagenes = imagenes;
-	}
+	}*/
 
 	public List<ServicioHabitacion> getServicios() {
 		return servicios;
