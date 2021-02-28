@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 
 public class Actividad{
 
+	/* Deprecated class */
 	
 	private String nombre;
 	

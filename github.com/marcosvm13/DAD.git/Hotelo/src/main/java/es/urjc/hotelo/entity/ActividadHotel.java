@@ -10,14 +10,17 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class ActividadHotel{
-	/*
-	 * Clase Que hereda de Actividad que representa las actividades disponibles de un hotel
-	 * Lista de Hoteles asociadas con la actividad
-	 */
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	/*
+	 * Nombre
+	 * Descripción de la actividad
+	 * Número de plazas
+	 * Hoteles que cuentan con dicha actividad
+	 */
 	
 	private String nombre;
 	

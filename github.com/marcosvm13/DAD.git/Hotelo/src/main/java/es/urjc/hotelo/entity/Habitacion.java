@@ -1,6 +1,7 @@
 package es.urjc.hotelo.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 
@@ -21,10 +22,9 @@ public class Habitacion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	
+		
 	/*
-	 * Numero
+	 * Número
 	 * Hotel
 	 * Reservas
 	 * Tamayo
@@ -43,14 +43,13 @@ public class Habitacion {
 	private String tamayo;
 	
 	
-	private HashSet<Date> ocupacion;
+	private HashSet<LocalDate> ocupacion;
+	
 	//private List<MultipartFile> imagenes;
 	
 	@ManyToMany
 	private List<ServicioHabitacion> servicios;
 
-	
-	
 	
 	public Habitacion() {
 		
@@ -67,11 +66,11 @@ public class Habitacion {
 		ocupacion = new HashSet<>();
 	}
 
-	public HashSet<Date> getOcupacion() {
+	public HashSet<LocalDate> getOcupacion() {
 		return ocupacion;
 	}
 
-	public void setOcupacion(HashSet<Date> ocupacion) {
+	public void setOcupacion(HashSet<LocalDate> ocupacion) {
 		this.ocupacion = ocupacion;
 	}
 

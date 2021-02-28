@@ -11,10 +11,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class ServicioHabitacion {
-	/*
-	 * Clase Que hereda de Actividad que representa los servicios de una habitacion
-	 * Lista de Habitaciones asociadas con el servicion
-	 */
+ 
 	@ManyToMany
 	private List<Habitacion> habitacion;
 	
@@ -26,11 +23,14 @@ public class ServicioHabitacion {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	/*
+	 * Nombre
+	 * Descripción del servicio
+	 */
+	
 	private String nombre;
 	
 	private String descripcion;
-	
-	private int plazas;
 	
 	
 	public long getId() {
@@ -38,13 +38,11 @@ public class ServicioHabitacion {
 	}
 
 
-	public ServicioHabitacion(String nombre, String descripcion, int plazas) {
+	public ServicioHabitacion(String nombre, String descripcion) {
 		super();
 		this.habitacion = new LinkedList<>();
-		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.plazas = plazas;
 	}
 
 
@@ -65,16 +63,6 @@ public class ServicioHabitacion {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-
-	public int getPlazas() {
-		return plazas;
-	}
-
-
-	public void setPlazas(int plazas) {
-		this.plazas = plazas;
 	}
 
 

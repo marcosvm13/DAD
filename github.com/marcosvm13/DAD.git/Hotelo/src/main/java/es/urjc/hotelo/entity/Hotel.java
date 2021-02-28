@@ -18,10 +18,10 @@ public class Hotel {
 	private long id;
 	
 	/*
-	 * nombre
-	 * direccion
-	 * habitaciones
-	 * actividades
+	 * Nombre
+	 * Dirección
+	 * Lista de habitaciones
+	 * Actividades
 	 */
 	
 	private String nombreHotel;

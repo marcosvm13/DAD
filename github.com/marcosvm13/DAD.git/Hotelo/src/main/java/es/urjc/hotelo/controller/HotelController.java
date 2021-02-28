@@ -1,9 +1,18 @@
 package es.urjc.hotelo.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -12,14 +21,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
 import es.urjc.hotelo.entity.ActividadHotel;
+import es.urjc.hotelo.entity.Habitacion;
 import es.urjc.hotelo.entity.Hotel;
 import es.urjc.hotelo.entity.Reserva;
+import es.urjc.hotelo.entity.ServicioHabitacion;
 import es.urjc.hotelo.repository.ActividadHotelRepository;
+import es.urjc.hotelo.repository.HabitacionRepository;
 import es.urjc.hotelo.repository.HotelRepository;
+import es.urjc.hotelo.repository.ReservaRepository;
 
 @Controller
 public class HotelController {
@@ -31,22 +47,21 @@ public class HotelController {
 	 private ActividadHotelRepository actividades ;
 	 
 	 @Autowired 
-	 private ActividadHotelRepository reservas;
+	 private ReservaRepository reservas;
+	 
+	 @Autowired
+	 private HabitacionRepository habitaciones;
+	 
 	 @PostConstruct
 	 public void init() {
-			 
-		 
 		 
 		 ActividadHotel ah1 = new ActividadHotel("Actividad Hotel","Descripcion de actividad hotel",10);
 		 
-		
 		 Hotel h1 = new Hotel("Barata, barata", "C/Hola", "Valencia", 1);
 		 Hotel h2 = new Hotel("Pago bien", "C/ Ni idea", "Barcelona", 2);
 		 Hotel h3 = new Hotel("Tercer hotel", "C/ 9º B", "Cadiz",3);
 		 Hotel h4 = new Hotel("Cuarto hotel", "C/ asdasdas", "Madrid", 4);
 		 
-		
-
 		 ah1.getHoteles().add(h1);
 		 h1.getActividades().add(ah1);
 		 
@@ -57,6 +72,13 @@ public class HotelController {
 		 
 		 actividades.save(ah1);
 	 	 
+		 Habitacion ha1 = new Habitacion(34, h1, null, "40x40", null);
+		 Habitacion ha2 = new Habitacion(35, h1, null, "300x300", null);
+		 Habitacion ha3 = new Habitacion(02, h2, null, "20x20", null);
+		 
+		 habitaciones.save(ha1);
+		 habitaciones.save(ha2);
+		 habitaciones.save(ha3);
 	 }
 
 	@GetMapping("/")
@@ -76,7 +98,7 @@ public class HotelController {
 		model.addAttribute("localidad", hotel.get().getLocalidad());
 		model.addAttribute("direccion", hotel.get().getDireccion());
 		model.addAttribute("actividades", hotel.get().getActividades());
-		System.out.println( hotel.get().getActividades().toString());
+		//System.out.println( hotel.get().getActividades().toString());
 		return "hotel";
 	}
 	
@@ -95,23 +117,64 @@ public class HotelController {
 		return "actividad";
 	}
 	
-	/*@GetMapping("/reserva/{id}")
-	public String reserva(Model model, Optional<Hotel> Hotel, @PathVariable long id) {
-			hotel = hoteles.findById(id);
-		
-		
-			model.addAttribute("nombreHotel", hotel.get().getNombreHotel());
-			model.addAttribute("localidad", hotel.get().getLocalidad());
-			model.addAttribute("direccion", hotel.get().getDireccion());
-			model.addAttribute("actividades", hotel.get().getActividades());
-			System.out.println( hotel.get().getActividades().toString());
+	
+	
+	@GetMapping("/reserva/{id}")
+	public String reserva(Model model, Optional<Hotel> Hotel, @PathVariable long id) {		
+			model.addAttribute("id", id);
+			model.addAttribute("primero", true);
 			return "reserva";
 		
-	}*/
-
+	}
+	
+	@PostMapping("/buscarHabitacion/{id}")
+	public String buscarHabitacion(Model model, Optional<Hotel> Hotel, 
+			@PathVariable long id, @RequestParam String fechaI, @RequestParam String fechaF) {		
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			LocalDate dateI = null;
+			LocalDate dateF = null;
+			dateI = LocalDate.parse(fechaI, format);
+			dateF = LocalDate.parse(fechaF, format);
+			
+			
+			//Poner Funciones y hacerlo con whiles Y PONER UNA NUEVA RESERVA
+			Habitacion adecuada = null;
+			
+			for(Habitacion h: hoteles.findById(id).get().getHabitaciones()) {
+				HashSet<LocalDate> ocupacion= h.getOcupacion();
+				for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
+					if(ocupacion.contains(d)) {
+						break;
+					}
+					adecuada = h;
+				}
+				if(h!=null) {
+					System.out.println(h.getId());
+					for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
+						ocupacion.add(d);
+					}
+					for(LocalDate d : h.getOcupacion()) {
+						System.out.println(d);
+					}
+					break;
+				}
+			}
+			if(dateI != null && dateF != null) {
+				System.out.println("FechaI: " + dateI.toString());
+				System.out.println("FechaF: " + dateF.toString());
+			}
+			model.addAttribute("id", id);
+			model.addAttribute("primero", false);
+			model.addAttribute("habitacion", adecuada);
+			return "reserva";
+	}
+	
+	
 	@GetMapping("/login")
 	public String login(Model model) {
 		return "InicioSesion";
 	}
+	
+
 	
 }
