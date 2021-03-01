@@ -1,6 +1,7 @@
 package es.urjc.hotelo.entity;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,19 +35,24 @@ public class Reserva {
 	@OneToOne
 	private Reseya reseyas;
 	
-	private String fecha;
+	private String fechaDeEntrada;
+	private String fechaDeSalida;
+	
+	private AtomicBoolean reservado;
+	
 	
 	public Reserva() {
 		
 	}
 	
-	public Reserva(Huesped huesped, Habitacion habitacion,  String fecha) {
+	public Reserva(Huesped huesped, Habitacion habitacion,  String fechaDeEntrada,  String fechaDeSalida) {
 		
-
+		this.reservado.set(false);
 		this.huesped = huesped;
 		this.habitacion = habitacion;
 
-		this.fecha = fecha;
+		this.fechaDeEntrada = fechaDeEntrada;
+		this.fechaDeSalida = fechaDeSalida;
 		this.reseyas = null;
 	}
 	
@@ -58,6 +64,16 @@ public class Reserva {
 		return huesped;
 	}
 	
+	
+	
+	public AtomicBoolean getReservado() {
+		return reservado;
+	}
+
+	public void setReservado(AtomicBoolean reservado) {
+		this.reservado = reservado;
+	}
+
 	public void setHuesped(Huesped huesped) {
 		this.huesped = huesped;
 	}
@@ -78,13 +94,23 @@ public class Reserva {
 	public void setReseyas(Reseya reseyas) {
 		this.reseyas = reseyas;
 	}
-	
-	public String getFecha() {
-		return fecha;
+
+	public String getFechaDeEntrada() {
+		return fechaDeEntrada;
+	}
+
+	public void setFechaDeEntrada(String fechaDeEntrada) {
+		this.fechaDeEntrada = fechaDeEntrada;
+	}
+
+	public String getFechaDeSalida() {
+		return fechaDeSalida;
+	}
+
+	public void setFechaDeSalida(String fechaDeSalida) {
+		this.fechaDeSalida = fechaDeSalida;
 	}
 	
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
+
 		
 }

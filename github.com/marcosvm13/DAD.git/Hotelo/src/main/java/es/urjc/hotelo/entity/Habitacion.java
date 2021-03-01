@@ -2,6 +2,7 @@ package es.urjc.hotelo.entity;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class Habitacion {
 	private String tamayo;
 	
 	
-	private HashSet<LocalDate> ocupacion;
+	private HashMap<LocalDate, Boolean> ocupacion;
 	
 	//private List<MultipartFile> imagenes;
 	
@@ -63,14 +64,14 @@ public class Habitacion {
 		this.tamayo = tamayo;
 		//this.imagenes = imagenes;
 		this.servicios = servicios;
-		ocupacion = new HashSet<>();
+		ocupacion = new HashMap<>();
 	}
 
-	public HashSet<LocalDate> getOcupacion() {
+	public HashMap<LocalDate, Boolean> getOcupacion() {
 		return ocupacion;
 	}
 
-	public void setOcupacion(HashSet<LocalDate> ocupacion) {
+	public void setOcupacion(HashMap<LocalDate, Boolean> ocupacion) {
 		this.ocupacion = ocupacion;
 	}
 

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +31,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import es.urjc.hotelo.entity.ActividadHotel;
 import es.urjc.hotelo.entity.Habitacion;
 import es.urjc.hotelo.entity.Hotel;
+import es.urjc.hotelo.entity.Huesped;
 import es.urjc.hotelo.entity.Reserva;
 import es.urjc.hotelo.entity.ServicioHabitacion;
 import es.urjc.hotelo.repository.ActividadHotelRepository;
@@ -141,34 +143,26 @@ public class HotelController {
 			Habitacion adecuada = null;
 			
 			for(Habitacion h: hoteles.findById(id).get().getHabitaciones()) {
-				HashSet<LocalDate> ocupacion= h.getOcupacion();
+				HashMap<LocalDate, Boolean> ocupacion= h.getOcupacion();
 				for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-					if(ocupacion.contains(d)) {
+					if(ocupacion.containsKey(d)) {
 						break;
 					}
 					adecuada = h;
 				}
 				if(h!=null) {
-					System.out.println(h.getId());
 					for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-						ocupacion.add(d);
+						ocupacion.put(d, false);
 					}
-					for(LocalDate d : h.getOcupacion()) {
-						System.out.println(d);
-					}
-					break;
+					model.addAttribute("primero", false);
+					model.addAttribute("habitacion", adecuada);
+					return "reserva";
 				}
 			}
-			if(dateI != null && dateF != null) {
-				System.out.println("FechaI: " + dateI.toString());
-				System.out.println("FechaF: " + dateF.toString());
-			}
-			model.addAttribute("id", id);
-			model.addAttribute("primero", false);
-			model.addAttribute("habitacion", adecuada);
-			return "reserva";
+		return "Principal";
 	}
 	
+
 	
 	@GetMapping("/login")
 	public String login(Model model) {

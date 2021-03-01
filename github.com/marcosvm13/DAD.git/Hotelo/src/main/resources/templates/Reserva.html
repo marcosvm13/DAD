@@ -31,7 +31,7 @@
 		{{#habitacion}}
 			<h1> Reserva de la habitacion {{numero}}.</h1>
 			<h3>De tamanyo {{tamayo}}</h3>
-		{{/habitacion}}
+		
 	<!--{{#premium}}
 		
 		<div class="card" style="width: 18rem;">
@@ -78,8 +78,14 @@
 	
 	<br>
 	<br>
-	  -->
-	<button>Reserva</button>
+		  -->
+		  	
+		  
+		<form action="/reservaCompleta/{{idReserva}}" method="get">
+			<input class="btn btn-danger"  type="submit" value="Reservar">
+			<div name="" data-value="valor"></div>
+		</form>
+	{{/habitacion}}
 	
 	</div>
 </div>
