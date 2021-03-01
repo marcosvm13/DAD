@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -83,7 +84,7 @@ public class HotelController {
 		 habitaciones.save(ha3);
 	 }
 
-	@GetMapping("/")
+	@RequestMapping("/")
 	public String greeting(Model model) {
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
@@ -137,32 +138,57 @@ public class HotelController {
 			LocalDate dateF = null;
 			dateI = LocalDate.parse(fechaI, format);
 			dateF = LocalDate.parse(fechaF, format);
-			
+	
 			
 			//Poner Funciones y hacerlo con whiles Y PONER UNA NUEVA RESERVA
-			Habitacion adecuada = null;
+			
 			
 			for(Habitacion h: hoteles.findById(id).get().getHabitaciones()) {
-				HashMap<LocalDate, Boolean> ocupacion= h.getOcupacion();
+				HashSet<LocalDate> ocupacion= h.getOcupacion();
+				boolean esta = false;
 				for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-					if(ocupacion.containsKey(d)) {
-						break;
+					if(ocupacion.contains(d)) {
+						esta = true;
 					}
-					adecuada = h;
 				}
-				if(h!=null) {
-					for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-						ocupacion.put(d, false);
-					}
+				if(!esta) {
+					model.addAttribute("fechaI", fechaI);
+					model.addAttribute("fechaF", fechaF);
 					model.addAttribute("primero", false);
-					model.addAttribute("habitacion", adecuada);
+					model.addAttribute("habitacion", h);
 					return "reserva";
 				}
 			}
-		return "Principal";
+			model.addAttribute("hoteles", hoteles.findAll());
+			return "Principal";
 	}
+	   
 	
-
+	
+	@GetMapping("/reservaCompleta/{id}/{fechaI}/{fechaF}")
+	public String reservaCompleta(Model model, Optional<Habitacion> habitacion, @PathVariable long id, @PathVariable String fechaI, @PathVariable String fechaF) {		
+		System.out.println("SE EJECUTA");
+		habitacion= habitaciones.findById(id);
+		HashSet<LocalDate> ocupacion= habitacion.get().getOcupacion();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate dateI = null;
+		LocalDate dateF = null;
+		dateI = LocalDate.parse(fechaI, format);
+		dateF = LocalDate.parse(fechaF, format);
+		for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
+			if(ocupacion.contains(d)) {
+				model.addAttribute("hoteles", hoteles.findAll());
+				return "Principal";
+			}
+			}
+		for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
+				ocupacion.add(d);
+		}
+				Reserva reserva = new Reserva(null, habitacion.get(), fechaI, fechaF);
+				reservas.save(reserva);
+				model.addAttribute("reserva",reserva);
+				return "ConfirmarReserva";
+	}
 	
 	@GetMapping("/login")
 	public String login(Model model) {

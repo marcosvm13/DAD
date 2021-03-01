@@ -2,9 +2,12 @@ package es.urjc.hotelo.entity;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +47,7 @@ public class Habitacion {
 	private String tamayo;
 	
 	
-	private HashMap<LocalDate, Boolean> ocupacion;
+	private HashSet<LocalDate> ocupacion;
 	
 	//private List<MultipartFile> imagenes;
 	
@@ -64,14 +67,14 @@ public class Habitacion {
 		this.tamayo = tamayo;
 		//this.imagenes = imagenes;
 		this.servicios = servicios;
-		ocupacion = new HashMap<>();
+		ocupacion = new HashSet<>();
 	}
 
-	public HashMap<LocalDate, Boolean> getOcupacion() {
+	public HashSet<LocalDate> getOcupacion() {
 		return ocupacion;
 	}
 
-	public void setOcupacion(HashMap<LocalDate, Boolean> ocupacion) {
+	public void setOcupacion(HashSet<LocalDate> ocupacion) {
 		this.ocupacion = ocupacion;
 	}
 

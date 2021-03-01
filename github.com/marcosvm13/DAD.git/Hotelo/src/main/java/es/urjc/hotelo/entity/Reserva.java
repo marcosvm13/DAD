@@ -38,7 +38,7 @@ public class Reserva {
 	private String fechaDeEntrada;
 	private String fechaDeSalida;
 	
-	private AtomicBoolean reservado;
+
 	
 	
 	public Reserva() {
@@ -47,7 +47,6 @@ public class Reserva {
 	
 	public Reserva(Huesped huesped, Habitacion habitacion,  String fechaDeEntrada,  String fechaDeSalida) {
 		
-		this.reservado.set(false);
 		this.huesped = huesped;
 		this.habitacion = habitacion;
 
@@ -65,14 +64,6 @@ public class Reserva {
 	}
 	
 	
-	
-	public AtomicBoolean getReservado() {
-		return reservado;
-	}
-
-	public void setReservado(AtomicBoolean reservado) {
-		this.reservado = reservado;
-	}
 
 	public void setHuesped(Huesped huesped) {
 		this.huesped = huesped;

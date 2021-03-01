@@ -81,12 +81,15 @@
 		  -->
 		  	
 		  
-		<form action="/reservaCompleta/{{idReserva}}" method="get">
+		<form action="/reservaCompleta/{{id}}/{{fechaI}}/{{fechaF}}" method="get">
 			<input class="btn btn-danger"  type="submit" value="Reservar">
 			<div name="" data-value="valor"></div>
 		</form>
 	{{/habitacion}}
 	
+	{{^habitacion}}
+		<p class="lead text-muted">No hay habitaciones disponbles.</p>
+	{{/habitacion}}
 	</div>
 </div>
 	
