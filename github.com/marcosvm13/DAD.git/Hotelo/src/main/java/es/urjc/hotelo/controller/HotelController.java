@@ -97,8 +97,7 @@ public class HotelController {
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
 	}
-	
-	
+		
 	@GetMapping("/hotel/{id}")
 	public String hotel(Model model, Optional<Hotel> hotel, @PathVariable long id) {
 		
@@ -112,7 +111,6 @@ public class HotelController {
 		//System.out.println( hotel.get().getActividades().toString());
 		return "hotel";
 	}
-	
 
 	@GetMapping("/actividad/{id}")
 	public String actividad(Model model, Optional<ActividadHotel> actividad, @PathVariable long id) {
@@ -127,8 +125,6 @@ public class HotelController {
 		
 		return "actividad";
 	}
-	
-	
 	
 	@GetMapping("/reserva/{id}")
 	public String reserva(Model model, Optional<Hotel> Hotel, @PathVariable long id) {		
@@ -169,8 +165,7 @@ public class HotelController {
 			}
 			model.addAttribute("hoteles", hoteles.findAll());
 			return "Principal";
-	}
-	   
+	}	   
 	
 	@GetMapping("/reservaCompleta/{id}/{fechaI}/{fechaF}")
 	public String reservaCompleta(Model model, Optional<Habitacion> habitacion, @PathVariable long id, @PathVariable String fechaI, @PathVariable String fechaF) {		
@@ -199,7 +194,6 @@ public class HotelController {
 				model.addAttribute("reserva",reserva);
 				return "ConfirmarReserva";
 	}
-	
 	
 	@GetMapping("/crearHotel")
 	public String crearHotel(Model model) {
@@ -238,13 +232,12 @@ public class HotelController {
 		return "Principal";
 	}
 	
-	
 	@GetMapping("/misReservas")
 	public String misReservas(Model model) {
 		
 		Optional<Huesped> usu = huespedes.findById((long) 1);
 		
-		model.addAttribute("huesped",usu.get());
+		model.addAttribute("huesped", usu.get());
 		model.addAttribute("reservas",usu.get().getReservas());
 		
 		return "MisReservas";
@@ -267,7 +260,6 @@ public class HotelController {
 		return "Principal";
 	}
 	
-
 	@PostMapping(value="/nuevaHabitacion/{id}", params="otra")
 	public String nuevaHabitacionSeguir(Model model, @PathVariable Long id,  @RequestParam String numero, @RequestParam String tamayo) {
 		Hotel hotel = hoteles.findById(id).get();
@@ -276,13 +268,6 @@ public class HotelController {
 		model.addAttribute("nombreHotel", hotel.getNombreHotel());
 		model.addAttribute("id", hotel.getId());
 		return "AyadirHabitaciones";
-	}
-	
-	@GetMapping("/huesped/{id}")
-	public String usuario(Model model, @PathVariable Long id) {
-		Optional<Huesped> huesped = huespedes.findById(id);
-		model.addAttribute("huesped", huesped.get());
-		return "Huesped";
 	}
 	
 	@GetMapping("/login")

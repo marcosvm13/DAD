@@ -6,12 +6,20 @@
 
 <main>
  
-<br><br><br>
+<br>
 
+	<div class="container p-5">
+	{{#huesped}}
+		<br>
+		<h1>{{nombreHuesped}} {{apellidos}}</h1>
+		<br>
+		<h2>{{correo}}</h2>
+		<p>{{telefono}}</p>
+		{{/huesped}}
+	</div>
 
-
-{{#reservas}}
-<div class="container">
+	{{#reservas}}
+	<div class="container">
 		
 		
 			<div class="card" style="width: 18rem;">
@@ -34,12 +42,8 @@
 		    <br>
 		    </div>
 		     <br>
-{{/reservas}}
+	{{/reservas}}
 		     
-		    
-			
-		
-		
 </div>
 
 
