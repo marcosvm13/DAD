@@ -38,6 +38,7 @@ import es.urjc.hotelo.entity.ServicioHabitacion;
 import es.urjc.hotelo.repository.ActividadHotelRepository;
 import es.urjc.hotelo.repository.HabitacionRepository;
 import es.urjc.hotelo.repository.HotelRepository;
+import es.urjc.hotelo.repository.HuespedRepository;
 import es.urjc.hotelo.repository.ReservaRepository;
 
 @Controller
@@ -45,6 +46,9 @@ public class HotelController {
 		
 	 @Autowired
 	 private HotelRepository hoteles;
+	 
+	 @Autowired
+	 private HuespedRepository huespedes;
 	
 	 @Autowired 
 	 private ActividadHotelRepository actividades ;
@@ -65,6 +69,10 @@ public class HotelController {
 		 Hotel h3 = new Hotel("Tercer hotel", "C/ 9º B", "Cadiz",3);
 		 Hotel h4 = new Hotel("Cuarto hotel", "C/ asdasdas", "Madrid", 4);
 		 
+		 
+		 Huesped usuario1 = new Huesped("Huesped 1", "Apellido1" , 111111111, "huesped1@gmail.com");
+		 huespedes.save(usuario1);
+		 
 		 ah1.getHoteles().add(h1);
 		 h1.getActividades().add(ah1);
 		 
@@ -75,9 +83,9 @@ public class HotelController {
 		 
 		 actividades.save(ah1);
 	 	 
-		 Habitacion ha1 = new Habitacion(34, h1, null, "40x40", null);
-		 Habitacion ha2 = new Habitacion(35, h1, null, "300x300", null);
-		 Habitacion ha3 = new Habitacion(02, h2, null, "20x20", null);
+		 Habitacion ha1 = new Habitacion(34, h1, "40x40" );
+		 Habitacion ha2 = new Habitacion(35, h1, "300x300" );
+		 Habitacion ha3 = new Habitacion(02, h2, "20x20");
 		 
 		 habitaciones.save(ha1);
 		 habitaciones.save(ha2);
@@ -164,7 +172,6 @@ public class HotelController {
 	}
 	   
 	
-	
 	@GetMapping("/reservaCompleta/{id}/{fechaI}/{fechaF}")
 	public String reservaCompleta(Model model, Optional<Habitacion> habitacion, @PathVariable long id, @PathVariable String fechaI, @PathVariable String fechaF) {		
 		System.out.println("SE EJECUTA");
@@ -184,17 +191,103 @@ public class HotelController {
 		for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
 				ocupacion.add(d);
 		}
-				Reserva reserva = new Reserva(null, habitacion.get(), fechaI, fechaF);
+				Optional<Huesped> usu = huespedes.findById((long) 1);
+						
+				Reserva reserva = new Reserva(usu.get(), habitacion.get(), fechaI, fechaF);
+				
 				reservas.save(reserva);
 				model.addAttribute("reserva",reserva);
 				return "ConfirmarReserva";
+	}
+	
+	
+	@GetMapping("/crearHotel")
+	public String crearHotel(Model model) {
+		model.addAttribute("actividades", actividades.findAll());
+		return "InsertarHotel";
+	}
+	
+	@GetMapping("/crearActividad")
+	public String crearActividad(Model model) {
+		model.addAttribute("hoteles", hoteles.findAll());
+		return "InsertarActividad";
+	}
+	
+	@PostMapping("/hotelCreado")
+	public String creadoHotel(Model model, @RequestParam String nombre, @RequestParam String localidad, @RequestParam String direccion, @RequestParam String estrellas,  @RequestParam String[] actividadesHotel) {
+		Hotel h = new Hotel(nombre, localidad, direccion, Float.parseFloat(estrellas));
+		
+		for(String a: actividadesHotel) {
+			h.getActividades().addAll(actividades.findByNombre(nombre));
+		}
+		hoteles.save(h);
+		model.addAttribute("nombreHotel", h.getNombreHotel());
+		model.addAttribute("id", h.getId());
+		return "AyadirHabitaciones";
+	}
+	
+	@PostMapping("/actividadCreada")
+	public String creadoActividad(Model model, @RequestParam String nombre, @RequestParam String aforo, @RequestParam String descripcion, @RequestParam String[] hotelesActividad) {
+		ActividadHotel a = new ActividadHotel(nombre, descripcion, Integer.parseInt(aforo));
+		
+		for(String h: hotelesActividad) {
+			a.getHoteles().add(hoteles.findByNombreHotel(nombre));
+		}
+		actividades.save(a);
+		model.addAttribute("hoteles", hoteles.findAll());
+		return "Principal";
+	}
+	
+	
+	@GetMapping("/misReservas")
+	public String misReservas(Model model) {
+		
+		Optional<Huesped> usu = huespedes.findById((long) 1);
+		
+		model.addAttribute("huesped",usu.get());
+		model.addAttribute("reservas",usu.get().getReservas());
+		
+		return "MisReservas";
+	}
+	
+	@GetMapping("/nuevaHabitacion2/{id}")
+	public String nuevaHabitacion2(Model model, @PathVariable Long id) {
+		Hotel h = hoteles.findById(id).get();
+		model.addAttribute("nombreHotel", h.getNombreHotel());
+		model.addAttribute("id", h.getId());
+		return "AyadirHabitaciones";
+	}
+	
+	@PostMapping(value="/nuevaHabitacion/{id}", params="terminar")
+	public String nuevaHabitacionTerminar(Model model, @PathVariable Long id,  @RequestParam String numero, @RequestParam String tamayo) {
+		
+		Habitacion h = new Habitacion(Integer.parseInt(numero), hoteles.findById(id).get(), tamayo);
+		 habitaciones.save(h);
+		 model.addAttribute("hoteles", hoteles.findAll());
+		return "Principal";
+	}
+	
+
+	@PostMapping(value="/nuevaHabitacion/{id}", params="otra")
+	public String nuevaHabitacionSeguir(Model model, @PathVariable Long id,  @RequestParam String numero, @RequestParam String tamayo) {
+		Hotel hotel = hoteles.findById(id).get();
+		Habitacion h = new Habitacion(Integer.parseInt(numero), hotel, tamayo);
+		habitaciones.save(h);
+		model.addAttribute("nombreHotel", hotel.getNombreHotel());
+		model.addAttribute("id", hotel.getId());
+		return "AyadirHabitaciones";
+	}
+	
+	@GetMapping("/huesped/{id}")
+	public String usuario(Model model, @PathVariable Long id) {
+		Optional<Huesped> huesped = huespedes.findById(id);
+		model.addAttribute("huesped", huesped.get());
+		return "Huesped";
 	}
 	
 	@GetMapping("/login")
 	public String login(Model model) {
 		return "InicioSesion";
 	}
-	
-
 	
 }

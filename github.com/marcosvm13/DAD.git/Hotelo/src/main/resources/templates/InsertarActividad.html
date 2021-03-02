@@ -1,0 +1,31 @@
+{{>Cabecera}}
+
+	<h1 class="text-center">Inserte una nueva Actividad</h1>
+<div class="row ">
+			<div class="col-sm-4 col-sm-offset-3 mx-auto" >
+	<form action="/actividadCreada" method="post">
+		<div class="form-group">
+			<label for="nombre">Nombre</label> 
+			<input type="text" class="form-control" id="nombre" name="nombre">
+		</div>
+		<div class="form-group">
+			<label for="aforo">Aforo</label> <input
+				type="text" class="form-control" id="aforo" name="aforo">
+		</div>
+		<div class="form-group">
+			<label for="descripcion">Descripción</label> 
+			<input type="text" class="form-control" id="descripcion" name="descripcion">
+		</div>
+		 {{#hoteles}}
+		<div class="form-check form-switch">
+  			<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="hotelesActividad" value="{{nombreHotel}}">
+ 			<label class="form-check-label" for="flexSwitchCheckDefault">{{nombreHotel}}</label>
+		</div>
+		{{/hoteles}}
+		<div class="col-sm-1 col-sm-offset-3 mx-auto" >
+			<input class="text-center" type='submit' name='enviar' value='Enviar' />
+		</div>
+	</form>
+	</div> </div>
+	</body>
+</html>

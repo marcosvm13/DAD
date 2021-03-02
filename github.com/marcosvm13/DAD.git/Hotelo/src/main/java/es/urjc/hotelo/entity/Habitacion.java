@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -59,14 +60,14 @@ public class Habitacion {
 		
 	}
 
-	public Habitacion(int numero, Hotel hotel, List<Reserva> reservas, String tamayo, /*List<MultipartFile> imagenes,*/
-			List<ServicioHabitacion> servicios) {
+	public Habitacion(int numero, Hotel hotel, String tamayo /*List<MultipartFile> imagenes,*/
+			) {
 		this.numero = numero;
 		this.hotel = hotel;
-		this.reserva = reservas;
+		this.reserva = new LinkedList<>();
 		this.tamayo = tamayo;
 		//this.imagenes = imagenes;
-		this.servicios = servicios;
+		//this.servicios = new LinkedList<>();
 		ocupacion = new HashSet<>();
 	}
 

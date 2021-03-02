@@ -1,0 +1,46 @@
+
+
+
+{{>Cabecera}}
+
+
+<main>
+ 
+<br><br><br>
+
+
+
+{{#reservas}}
+<div class="container">
+		
+		
+			<div class="card" style="width: 18rem;">
+			<div class="card-body">
+			
+				{{#huesped}}
+			    <h5 class="card-title">Reserva de {{nombreHuesped}}</h5>
+			   	{{/huesped}}
+			    
+			 
+			    
+			     <h6 class="card-subtitle mb-2 text-muted">Habitacion : {{habitacion.numero}}</h6>
+			     
+			     <h6 class="card-subtitle mb-2 text-muted">Fecha de entrada : {{fechaDeEntrada}}</h6>
+			     
+			     <h6 class="card-subtitle mb-2 text-muted">Fecha de salida : {{fechaDeSalida}}</h6>
+			    
+				
+		    </div>
+		    <br>
+		    </div>
+		     <br>
+{{/reservas}}
+		     
+		    
+			
+		
+		
+</div>
+
+
+{{>Pie}}
