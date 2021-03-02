@@ -1,0 +1,51 @@
+
+{{>Cabecera}}
+
+<main>
+	
+	<br>
+	<div class="container p-5">
+	
+	<h1>Hotel:  {{nombreHotel}}</h1>
+	<h2>Direccion: {{direccion}}, {{localidad}}</h2>
+	<p>Actividades</p>
+	
+	{{#actividades}}
+		
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				
+			    <h5 class="card-title">{{nombre}}</h5>
+			     <h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
+			    <p class="card-text">{{descripcion}}</p>
+			    <!--  <form action="hotel/{{id}}">
+			    	<input type='submit' value='Enviar'/>
+			    </form>-->
+			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
+			    
+		    </div>
+		    
+		    </div>
+
+
+	{{/actividades}}
+	</div>
+	
+	<br><br>
+	
+	<form action="/nuevaHabitacion2/{{id}}" method="get">
+		<input class="btn btn-danger"  type="submit"  value="Nueva Habitación">
+	</form>
+	
+	
+	<form action="/reserva/{{id}}" method="get">
+		<input class="btn btn-danger"  type="submit" value="Reservar">
+	</form>
+
+<br><br>
+
+  	<form action="/" method="get">
+		<input class="button"  type="submit" value="Volver a inicio">
+	</form>
+	
+{{>Pie}}
