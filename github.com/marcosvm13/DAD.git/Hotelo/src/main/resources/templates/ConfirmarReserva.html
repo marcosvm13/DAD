@@ -6,6 +6,10 @@
  
 <br>
 <div class="container p-5">
+{{#mal}}
+	<h1>Habitación ya no disponible por favor vuelve a intentarlo</h1>
+{{/mal}}
+{{^mal}}
 {{#reserva}}
 	<h1> Confirmacion de la reserva  </h1>
 	
@@ -13,6 +17,7 @@
 	<h2>Fecha de salida: {{fechaDeSalida}}</h2>
 		
 {{/reserva}}
+{{/mal}}
 
 <br><br>
   	<form action="/" method="get">

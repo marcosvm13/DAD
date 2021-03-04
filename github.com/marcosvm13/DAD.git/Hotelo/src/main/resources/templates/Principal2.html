@@ -10,31 +10,32 @@
         <h1 class="fw-light">Encuentra el hotel ideal</h1>
         <p class="lead text-muted">Busca ofertas en hoteles, casas y en toda clase de establecimientos.</p>
         <p>
-          <a href="/principalActividades" class="btn btn-primary my-2">Ver Actividades</a>
+          <a href="/principalHoteles" class="btn btn-primary my-2">Ver Hoteles</a>
+          
         </p>
       </div>
     </div>
   </section>
 <div class="container">
-		{{#hoteles}}
+		{{#actividades}}
 		
-			<div class="card" style="width: 18rem;">
+		<div class="card" style="width: 18rem;">
 			<div class="card-body">
 				
-			    <h5 class="card-title">{{nombreHotel}}</h5>
-			     <h6 class="card-subtitle mb-2 text-muted">{{direccion}}</h6>
-			    <p class="card-text">{{estrellas}}</p>
+			    <h5 class="card-title">{{nombre}}</h5>
+			     <h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
+			    <p class="card-text">{{descripcion}}</p>
 			    <!--  <form action="hotel/{{id}}">
 			    	<input type='submit' value='Enviar'/>
 			    </form>-->
-			    <a href="/hotel/{{id}}" class="card-link">Info</a> 
-			    
+			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
 			    
 		    </div>
 		    
 		    </div>
 			<br>
-		{{/hoteles}}  
+
+	{{/actividades}}
 		
 </div>
 <br><br>

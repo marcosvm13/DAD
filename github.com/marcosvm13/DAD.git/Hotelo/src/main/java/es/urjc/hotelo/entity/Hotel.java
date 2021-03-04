@@ -36,7 +36,7 @@ public class Hotel {
 	@ManyToMany(mappedBy="hoteles")
 	private List<ActividadHotel> actividadHotel;
 
-	private float estrellas;
+	private int estrellas;
 
 	public Hotel() {
 		
@@ -51,7 +51,7 @@ public class Hotel {
 	}
 
 	public Hotel(String nombreHotel, String direccion,  String localidad,
-			 float estrellas) {
+			 int estrellas) {
 		super();
 		this.nombreHotel = nombreHotel;
 		this.direccion = direccion;
@@ -101,7 +101,7 @@ public class Hotel {
 		return estrellas;
 	}
 
-	public void setEstrellas(float estrellas) {
+	public void setEstrellas(int estrellas) {
 		this.estrellas = estrellas;
 	}
 

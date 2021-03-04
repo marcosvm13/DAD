@@ -9,5 +9,5 @@ import es.urjc.hotelo.entity.ActividadHotel;
 
 
 public interface ActividadHotelRepository extends JpaRepository<ActividadHotel,Long>{
-		List<ActividadHotel> findByNombre(String nombre);
+		ActividadHotel findByNombre(String nombre);
 }
