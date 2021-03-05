@@ -133,7 +133,7 @@ public class HotelController {
 			dateI = LocalDate.parse(fechaI, format);
 			dateF = LocalDate.parse(fechaF, format);
 			HashMap<String, Habitacion> tipos = new HashMap<>();
-			//Poner Funciones y hacerlo con whiles Y PONER UNA NUEVA RESERVA
+			
 	
 			for(Habitacion h: hoteles.findById(id).get().getHabitaciones()) {
 				HashSet<LocalDate> ocupacion= h.getOcupacion();
@@ -149,7 +149,7 @@ public class HotelController {
 			}
 			
 			if(!tipos.isEmpty()) {
-				System.out.println(tipos.values());
+				
 				model.addAttribute("fechaI", fechaI);
 				model.addAttribute("fechaF", fechaF);
 				model.addAttribute("primero", false);
@@ -182,6 +182,7 @@ public class HotelController {
 				Reserva reserva = new Reserva(usu.get(), habitacion.get(), fechaI, fechaF);
 				
 				reservas.save(reserva);
+				habitaciones.save(habitacion.get());
 				model.addAttribute("reserva",reserva);
 				return "ConfirmarReserva";
 	}
@@ -208,6 +209,7 @@ public class HotelController {
 				ActividadHotel act1= actividades.findByNombre(a);
 				h.getActividades().add(act1);
 				act1.getHoteles().add(h);
+				actividades.save(act1);
 				}
 			}
 		hoteles.save(h);
@@ -232,9 +234,10 @@ public class HotelController {
 		
 			a.getHoteles().add(h1);
 			h1.getActividades().add(a);
-			
+			hoteles.save(h1);
 		}
 		actividades.save(a);
+		
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
 	}
@@ -279,14 +282,11 @@ public class HotelController {
 		if(actividadesHotel != null) {
 			for(String a: actividadesHotel) {
 				ActividadHotel act1= actividades.findByNombre(a);
-				System.out.println("HOTELES" + act1.getHoteles());
-				System.out.println("ACTIVIDADES" + h.getActividades());
 				h.getActividades().add(act1);
 				act1.getHoteles().add(h);
-				System.out.println("ACTIVIDAD ID" + actividades.findById(act1.getId()).get().getHoteles());
-				System.out.println("HOTEL ID" + hoteles.findById(id).get().getActividades());
-				
+				actividades.save(act1);
 			}
+			hoteles.save(h);
 		}
 		
 		model.addAttribute("hotel", h);
@@ -314,6 +314,61 @@ public class HotelController {
 		model.addAttribute("id", hotel.getId());
 		return "AyadirHabitaciones";
 	}
+	
+	@GetMapping("/eliminarHotel/{id}")
+	public String eliminarHotel(Model model, @PathVariable Long id) {
+		Hotel h = hoteles.findById(id).get();
+		for(ActividadHotel a: h.getActividades()) {
+			a.getHoteles().remove(h);
+			actividades.save(a);
+		}
+		h.getActividades().clear();
+		hoteles.save(h);
+		
+		hoteles.deleteById(id);
+		model.addAttribute("hoteles", hoteles.findAll());
+		return "Principal";
+	}
+	@GetMapping("/eliminarActividad/{id}")
+	public String eliminarActividad(Model model, @PathVariable Long id) {
+		ActividadHotel a = actividades.findById(id).get();
+		for(Hotel h: a.getHoteles()) {
+			h.getActividades().remove(a);
+			hoteles.save(h);
+		}
+		a.getHoteles().clear();
+		actividades.save(a);
+		
+		actividades.deleteById(id);
+		model.addAttribute("actividades", actividades.findAll());
+		return "Principal2";
+	}
+	
+	@GetMapping("/eliminarReserva/{id}")
+	public String eliminarReserva(Model model, @PathVariable Long id) {
+		
+		Reserva r = reservas.findById(id).get();
+		Habitacion h = r.getHabitacion();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate dateI = LocalDate.parse(r.getFechaDeEntrada(), format);
+		LocalDate dateF = LocalDate.parse(r.getFechaDeSalida(), format);	
+		for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
+			h.getOcupacion().remove(d);
+		}
+		h.getReservas().remove(r);
+		habitaciones.save(h);
+		reservas.deleteById(id);
+		
+		
+		
+		Optional<Huesped> usu = huespedes.findById((long) 1);
+		
+		model.addAttribute("huesped", usu.get());
+		model.addAttribute("reservas",usu.get().getReservas());
+		
+		return "MisReservas";
+	}
+	
 	
 	@GetMapping("/login")
 	public String login(Model model) {

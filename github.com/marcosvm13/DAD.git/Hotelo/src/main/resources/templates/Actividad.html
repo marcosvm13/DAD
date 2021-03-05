@@ -32,7 +32,11 @@
 			{{/hoteles}}
 			
 		{{/actividad}}
-		
+		<br><br>
+			<form action="/eliminarActividad/{{id}}" method="get">
+				<input class="btn btn-danger"  type="submit" value="Eliminar">
+			</form>
+		<br><br>
 		<br><br>
 		<form action="/" method="get">
 			<input class="button"  type="submit" value="Volver a inicio">

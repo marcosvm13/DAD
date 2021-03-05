@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,7 +44,7 @@ public class Habitacion {
 	@ManyToOne
 	private Hotel hotel;
 	
-	@OneToMany(mappedBy="habitacion")
+	@OneToMany(mappedBy="habitacion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Reserva> reserva;
 	
 	private String tamayo;
