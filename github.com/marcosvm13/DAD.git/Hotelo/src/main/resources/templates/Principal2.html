@@ -16,28 +16,35 @@
       </div>
     </div>
   </section>
-<div class="container">
+  
+	<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
+        	
 		{{#actividades}}
 		
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
+			<div class="col-md-4">
+        		<div class="card mb-4 box-shadow" style="width: 20rem;">
+            		<div class="card-body">
 				
-			    <h5 class="card-title">{{nombre}}</h5>
-			     <h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
-			    <p class="card-text">{{descripcion}}</p>
-			    <!--  <form action="hotel/{{id}}">
-			    	<input type='submit' value='Enviar'/>
-			    </form>-->
-			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
+			    	<h5 class="card-title">{{nombre}}</h5>
+			     	<h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
+			    	<p class="card-text">{{descripcion}}</p>
+			    	<!--  <form action="hotel/{{id}}">
+			    		<input type='submit' value='Enviar'/>
+			    	</form>-->
+			    	<a href="/actividad/{{id}}" class="card-link">Info</a> 
 			    
-		    </div>
-		    
-		    </div>
-			<br>
+		    		</div>
+              	</div>
+            </div>
 
 	{{/actividades}}
 		
-</div>
+        </div>
+      </div>
+	</div>
+	
 <br><br>
 
 {{>Pie}}
