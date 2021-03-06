@@ -1,15 +1,10 @@
 package es.urjc.hotelo.entity;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Entity
@@ -54,8 +48,7 @@ public class Habitacion {
 	
 	//private List<MultipartFile> imagenes;
 	
-	@ManyToMany
-	private List<ServicioHabitacion> servicios;
+	
 
 	
 	public Habitacion() {
@@ -121,13 +114,7 @@ public class Habitacion {
 		this.imagenes = imagenes;
 	}*/
 
-	public List<ServicioHabitacion> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(List<ServicioHabitacion> servicios) {
-		this.servicios = servicios;
-	}
+	
 
 	public long getId() {
 		return id;

@@ -11,9 +11,9 @@
 		<div class="row"> 
 		<form action="/buscarHabitacion/{{id}}" method="post">
 			<label for="fechaI">Fecha Inicial: </label>
-			<input type="text" class="form-control" name="fechaI"><br>
+			<input type="date" class="form-control" name="fechaI"  data-toggle="tooltip" data-placement="top" title="dd-mm-aaaa" required><br>
 			<label for="fechaF">Fecha Final: </label>
-			<input type="text" class="form-control" name="fechaF"> 
+			<input type="date" class="form-control" name="fechaF"  data-toggle="tooltip" data-placement="top" title="dd-mm-aaaa" required> 
 			<br>
 			<input class="btn btn-danger"  type="submit" value="Buscar">
 		</form>
