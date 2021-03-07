@@ -106,7 +106,7 @@ public class HotelController {
 				ActividadHotel act1= actividades.findByNombre(a);
 				h.getActividades().add(act1);
 				act1.getHoteles().add(h);
-				actividades.save(act1);
+				
 			}
 		}
 		hoteles.save(h);
@@ -121,7 +121,7 @@ public class HotelController {
 		Hotel h = hoteles.findById(id).get();
 		for(ActividadHotel a: h.getActividades()) {
 			a.getHoteles().remove(h);
-			actividades.save(a);
+			
 		}
 		h.getActividades().clear();
 		hoteles.save(h);

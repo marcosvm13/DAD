@@ -68,7 +68,7 @@ public class ActividadController {
 		
 			a.getHoteles().add(h1);
 			h1.getActividades().add(a);
-			hoteles.save(h1);
+			
 		}
 		actividades.save(a);
 		
