@@ -3,6 +3,7 @@ package es.urjc.hotelo.entity;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,13 +31,13 @@ public class Hotel {
 	
 	private String direccion;
 	 
-	@OneToMany(mappedBy="hotel") 
+	@OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, orphanRemoval = true) 
 	private List<Habitacion> habitacion;
 	
-	@ManyToMany(mappedBy="hoteles")
+	@ManyToMany(mappedBy="hoteles",  cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	private List<ActividadHotel> actividadHotel;
 
-	private float estrellas;
+	private int estrellas;
 
 	public Hotel() {
 		
@@ -51,7 +52,7 @@ public class Hotel {
 	}
 
 	public Hotel(String nombreHotel, String direccion,  String localidad,
-			 float estrellas) {
+			 int estrellas) {
 		super();
 		this.nombreHotel = nombreHotel;
 		this.direccion = direccion;
@@ -101,7 +102,7 @@ public class Hotel {
 		return estrellas;
 	}
 
-	public void setEstrellas(float estrellas) {
+	public void setEstrellas(int estrellas) {
 		this.estrellas = estrellas;
 	}
 

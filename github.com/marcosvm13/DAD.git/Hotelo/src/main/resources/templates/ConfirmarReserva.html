@@ -1,0 +1,29 @@
+
+{{>Cabecera}}
+
+
+<main>
+ 
+<br>
+<div class="container p-5">
+{{#mal}}
+	<h1>Habitación ya no disponible por favor vuelve a intentarlo</h1>
+{{/mal}}
+{{^mal}}
+{{#reserva}}
+	<h2> Confirmacion de la reserva  </h2><br>
+	
+	<h4>Fecha de entrada: {{fechaDeEntrada}}</h4>
+	<h4>Fecha de salida: {{fechaDeSalida}}</h4>
+		
+{{/reserva}}
+{{/mal}}
+
+<br><br>
+  	<form action="/" method="get">
+		<input class="button"  type="submit" value="Volver a inicio">
+	</form>
+</div>
+
+
+{{>Pie}}

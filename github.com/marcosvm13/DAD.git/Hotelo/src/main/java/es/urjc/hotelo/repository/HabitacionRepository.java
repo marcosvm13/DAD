@@ -9,7 +9,7 @@ import es.urjc.hotelo.entity.Reserva;
 
 public interface HabitacionRepository extends JpaRepository<Habitacion,Long>{
 
-	List<Habitacion> findByNumero(int numero);
+	Habitacion findByNumero(int numero);
 	
 	Habitacion findByReserva(Reserva reserva);
 }

@@ -1,11 +1,11 @@
 package es.urjc.hotelo.entity;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.springframework.web.multipart.MultipartFile;
+
 
 
 @Entity
@@ -38,40 +38,39 @@ public class Habitacion {
 	@ManyToOne
 	private Hotel hotel;
 	
-	@OneToMany(mappedBy="habitacion")
+	@OneToMany(mappedBy="habitacion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Reserva> reserva;
 	
 	private String tamayo;
 	
 	
-	private HashMap<LocalDate, Boolean> ocupacion;
+	private HashSet<LocalDate> ocupacion;
 	
 	//private List<MultipartFile> imagenes;
 	
-	@ManyToMany
-	private List<ServicioHabitacion> servicios;
+	
 
 	
 	public Habitacion() {
 		
 	}
 
-	public Habitacion(int numero, Hotel hotel, List<Reserva> reservas, String tamayo, /*List<MultipartFile> imagenes,*/
-			List<ServicioHabitacion> servicios) {
+	public Habitacion(int numero, Hotel hotel, String tamayo /*List<MultipartFile> imagenes,*/
+			) {
 		this.numero = numero;
 		this.hotel = hotel;
-		this.reserva = reservas;
+		this.reserva = new LinkedList<>();
 		this.tamayo = tamayo;
 		//this.imagenes = imagenes;
-		this.servicios = servicios;
-		ocupacion = new HashMap<>();
+		//this.servicios = new LinkedList<>();
+		ocupacion = new HashSet<>();
 	}
 
-	public HashMap<LocalDate, Boolean> getOcupacion() {
+	public HashSet<LocalDate> getOcupacion() {
 		return ocupacion;
 	}
 
-	public void setOcupacion(HashMap<LocalDate, Boolean> ocupacion) {
+	public void setOcupacion(HashSet<LocalDate> ocupacion) {
 		this.ocupacion = ocupacion;
 	}
 
@@ -115,13 +114,7 @@ public class Habitacion {
 		this.imagenes = imagenes;
 	}*/
 
-	public List<ServicioHabitacion> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(List<ServicioHabitacion> servicios) {
-		this.servicios = servicios;
-	}
+	
 
 	public long getId() {
 		return id;

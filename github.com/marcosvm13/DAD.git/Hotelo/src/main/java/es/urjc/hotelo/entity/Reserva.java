@@ -1,13 +1,9 @@
 package es.urjc.hotelo.entity;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -32,13 +28,12 @@ public class Reserva {
 	private Habitacion habitacion;
 	
 	
-	@OneToOne
-	private Reseya reseyas;
+	
 	
 	private String fechaDeEntrada;
 	private String fechaDeSalida;
 	
-	private AtomicBoolean reservado;
+
 	
 	
 	public Reserva() {
@@ -47,13 +42,12 @@ public class Reserva {
 	
 	public Reserva(Huesped huesped, Habitacion habitacion,  String fechaDeEntrada,  String fechaDeSalida) {
 		
-		this.reservado.set(false);
 		this.huesped = huesped;
 		this.habitacion = habitacion;
 
 		this.fechaDeEntrada = fechaDeEntrada;
 		this.fechaDeSalida = fechaDeSalida;
-		this.reseyas = null;
+		
 	}
 	
 	public Long getId() {
@@ -65,14 +59,6 @@ public class Reserva {
 	}
 	
 	
-	
-	public AtomicBoolean getReservado() {
-		return reservado;
-	}
-
-	public void setReservado(AtomicBoolean reservado) {
-		this.reservado = reservado;
-	}
 
 	public void setHuesped(Huesped huesped) {
 		this.huesped = huesped;
@@ -87,13 +73,7 @@ public class Reserva {
 	}
 	
 	
-	public Reseya getReseyas() {
-		return reseyas;
-	}
 	
-	public void setReseyas(Reseya reseyas) {
-		this.reseyas = reseyas;
-	}
 
 	public String getFechaDeEntrada() {
 		return fechaDeEntrada;

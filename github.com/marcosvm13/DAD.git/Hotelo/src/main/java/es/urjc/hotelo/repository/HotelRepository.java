@@ -18,7 +18,7 @@ public interface HotelRepository extends JpaRepository<Hotel,Long>{
 	
 	
 	
-	List<Hotel> findByActividadHotel(ActividadHotel actividadHotel);
+	List<Hotel> findAllByActividadHotel(ActividadHotel actividadHotel);
 	
 	List<Hotel> findAll();
 	
