@@ -41,15 +41,18 @@
 		</div>
 			
 		{{/actividad}}
+		
 		<br><br>
+		
+		<div class="d-flex justify-content-between align-items-center">
 			<form action="/eliminarActividad/{{id}}" method="get">
 				<input class="btn btn-danger"  type="submit" value="Eliminar">
 			</form>
-		<br><br>
-		<br><br>
+
 		<form action="/principalActividades" method="get">
 			<input class="button"  type="submit" value="Volver a inicio">
 		</form>
+		</div>
 		
 	</div>
 

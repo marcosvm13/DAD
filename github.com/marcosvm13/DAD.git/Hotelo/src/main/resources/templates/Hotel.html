@@ -75,27 +75,27 @@
 	
 	<br><br>
 	
+	<div class="d-flex justify-content-between align-items-center">
 	<form action="/nuevaHabitacion2/{{id}}" method="get">
-		<input class="btn btn-danger"  type="submit"  value="Nueva Habitación">
+		<input class="btn btn-sm btn-outline-secondary"  type="submit"  value="Nueva Habitación">
 	</form>
-	<br><br>
+
 	<form action="/nuevaActividad/{{id}}" method="get">
-		<input class="btn btn-danger"  type="submit"  value="Nueva Actividad">
+		<input class="btn btn-sm btn-outline-secondary"  type="submit"  value="Nueva Actividad">
 	</form>
-	<br><br>
+
 	<form action="/reserva/{{id}}" method="get">
-		<input class="btn btn-danger"  type="submit" value="Reservar">
+		<input class="btn btn-sm btn-outline-secondary"  type="submit" value="Reservar">
 	</form>
-<br><br>
+
 	<form action="/eliminarHotel/{{id}}" method="get">
 		<input class="btn btn-danger"  type="submit" value="Eliminar">
 	</form>
-<br><br>
 
   	<form action="/" method="get">
 		<input class="button"  type="submit" value="Volver a inicio">
 	</form>
-	
+	</div>
 	</div>
 	
 {{>Pie}}
