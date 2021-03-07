@@ -7,25 +7,31 @@
 	<div class="container p-5">
 	{{#hotel}}
 	
-	<h1>Hotel:  {{nombreHotel}}</h1>
-	<h2>Direccion: {{direccion}}, {{localidad}}</h2>
+	<h1>{{nombreHotel}}</h1>
+	<h4>Direccion: {{direccion}}, {{localidad}}</h4>
 	<br>
 	<p>Actividades</p>
 	
+	<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
+	
 		{{#actividades}}
 		
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
+		<div class="col-md-4">
+        	<div class="card mb-4 box-shadow" style="width: 20rem;">
+            	<div class="card-body">
 				
 			    <h5 class="card-title">{{nombre}}</h5>
-			     <h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
+			    <h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
 			    <p class="card-text">{{descripcion}}</p>
 			    <!--  <form action="hotel/{{id}}">
 			    	<input type='submit' value='Enviar'/>
 			    </form>-->
 			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
 			    
-		    </div>  
+		    	</div>
+			</div>
 		</div>
 
 		{{/actividades}}
@@ -34,18 +40,27 @@
 			<p class="card-subtitle mb-2 text-muted">Este hotel no cuenta con actividades.</p>
 		{{/actividades}}
 		
-		<br>
-		<p>Habitaciones</p>
+		</div></div></div>
+		
+	<br>
+	<p>Habitaciones</p>
+
+	<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
 		
 		{{#habitaciones}}
 		
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
+		<div class="col-md-4">
+        	<div class="card mb-4 box-shadow" style="width: 20rem;">
+            	<div class="card-body">
 				
 			    <h5 class="card-title">No. {{numero}}</h5>
 			    <p class="card-text">{{tamayo}}</p>
 			    <a href="/eliminarHabitacion/{{id}}" class="card-link text-danger">Eliminar</a> 
-		    </div>  
+		    	
+		    	</div>
+			</div>
 		</div>
 		
 		{{/habitaciones}}
@@ -53,6 +68,8 @@
 		{{^habitaciones}}
 			<p class="card-subtitle mb-2 text-muted">Este hotel sorprendentemente no cuenta con habitaciones.</p>
 		{{/habitaciones}}
+	
+		</div></div></div>
 	
 	{{/hotel}}
 	
