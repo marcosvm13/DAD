@@ -8,14 +8,19 @@
 		
 		{{#actividad}}
 		<h1>{{nombre}}</h1>
-		<h2>Aforo: {{plazas}}</h2>
-		<p>{{descripcion}}<p>
+		<h3>Aforo: {{plazas}}</h3>
+		<h5>{{descripcion}}</h5><br>
 		<p>Hoteles: <p>	
+		
+		<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
 		
 			{{#hoteles}}
 		
-			<div class="card" style="width: 18rem;">
-				<div class="card-body">
+			<div class="col-md-4">
+              	<div class="card mb-4 box-shadow" style="width: 20rem;">
+                	<div class="card-body">
 				
 			    	<h5 class="card-title">{{nombreHotel}}</h5>
 			     	<h6 class="card-subtitle mb-2 text-muted">{{direccion}}</h6>
@@ -26,10 +31,14 @@
 			    	<a href="/hotel/{{id}}" class="card-link">Info</a> 
 			   
 		    	</div>
-		    
+		    </div>
 		    </div>
 		
 			{{/hoteles}}
+			
+			</div>
+      </div>
+	</div>
 			
 		{{/actividad}}
 		<br><br>
@@ -38,7 +47,7 @@
 			</form>
 		<br><br>
 		<br><br>
-		<form action="/" method="get">
+		<form action="/principalActividades" method="get">
 			<input class="button"  type="submit" value="Volver a inicio">
 		</form>
 		

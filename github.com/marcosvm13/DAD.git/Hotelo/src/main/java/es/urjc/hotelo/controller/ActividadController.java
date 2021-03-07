@@ -23,17 +23,12 @@ import es.urjc.hotelo.repository.HotelRepository;
 
 @Controller
 public class ActividadController {
-
-	 @Autowired
-	 private HotelRepository hoteles;
-	 
-
 	
-	 @Autowired 
-	 private ActividadHotelRepository actividades ;
-	 
-
-	 
+	@Autowired
+	private HotelRepository hoteles;
+	
+	@Autowired 
+	private ActividadHotelRepository actividades ;
 	 
 	@RequestMapping("/principalActividades")
 	public String principalActividades(Model model) {
@@ -48,6 +43,7 @@ public class ActividadController {
 		model.addAttribute("actividad", actividad.get());
 		return "actividad";
 	}
+	
 	
 	@GetMapping("/crearActividad")
 	public String crearActividad(Model model) {
@@ -76,8 +72,8 @@ public class ActividadController {
 		}
 		actividades.save(a);
 		
-		model.addAttribute("hoteles", hoteles.findAll());
-		return "Principal";
+		model.addAttribute("actividades", actividades.findAll());
+		return "Principal2";
 	}
 	
 	
@@ -96,6 +92,7 @@ public class ActividadController {
 		return "AyadirActividad";
 	}
 	
+	
 	@PostMapping("/actividadAyadida/{id}")
 	public String actividadAyadida(Model model, @PathVariable Long id,  @RequestParam(required = false) String[] actividadesHotel) {
 		Hotel h = hoteles.findById(id).get();
@@ -112,6 +109,7 @@ public class ActividadController {
 		model.addAttribute("hotel", h);
 		return "hotel";
 	}
+	
 	
 	@GetMapping("/eliminarActividad/{id}")
 	public String eliminarActividad(Model model, @PathVariable Long id) {
