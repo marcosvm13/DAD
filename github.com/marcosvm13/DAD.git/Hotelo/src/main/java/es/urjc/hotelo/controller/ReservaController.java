@@ -71,7 +71,6 @@ public class ReservaController {
 		Reserva reserva = new Reserva(usu.get(), habitacion.get(), fechaI, fechaF);
 					
 		reservas.save(reserva);
-		habitaciones.save(habitacion.get());
 		model.addAttribute("reserva",reserva);
 		return "ConfirmarReserva";
 	}
