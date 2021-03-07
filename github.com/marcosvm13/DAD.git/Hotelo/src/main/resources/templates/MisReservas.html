@@ -13,6 +13,7 @@
 		<br>
 		<h1>{{nombreHuesped}} {{apellidos}}</h1>
 		<br>
+<<<<<<< HEAD
 		<h4>Telefono : {{telefono}}</h4>
 		<br>
 		<h4>Correo : {{correo}}</h4>
@@ -51,6 +52,38 @@
 		</div>
       </div>
 	</div>
+=======
+		<h2>{{correo}}</h2>
+		<p>{{telefono}}</p>
+		{{/huesped}}
+	</div>
+
+	{{#reservas}}
+	<div class="container">
+		
+		
+			<div class="card" style="width: 18rem;">
+			<div class="card-body">
+			
+				{{#huesped}}
+			    <h5 class="card-title">Reserva de {{nombreHuesped}}</h5>
+			   	{{/huesped}}
+			    
+			 
+			    
+			     <h6 class="card-subtitle mb-2 text-muted">Habitacion : {{habitacion.numero}}</h6>
+			     
+			     <h6 class="card-subtitle mb-2 text-muted">Fecha de entrada : {{fechaDeEntrada}}</h6>
+			     
+			     <h6 class="card-subtitle mb-2 text-muted">Fecha de salida : {{fechaDeSalida}}</h6>
+			    
+				 <a href="/eliminarReserva/{{id}}" class="card-link text-danger">Eliminar</a> 
+		    </div>
+		    <br>
+		    </div>
+		     <br>
+	{{/reservas}}
+>>>>>>> branch 'master' of https://github.com/marcosvm13/DAD
 		     
 </div>
 
