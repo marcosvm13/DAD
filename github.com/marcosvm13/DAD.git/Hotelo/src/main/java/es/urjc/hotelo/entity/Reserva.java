@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
 
 @Entity
 public class Reserva {
@@ -89,6 +89,12 @@ public class Reserva {
 
 	public void setFechaDeSalida(String fechaDeSalida) {
 		this.fechaDeSalida = fechaDeSalida;
+	}
+
+	@Override
+	public String toString() {
+		return "Reserva [id=" + id + ", huesped=" + huesped + ", habitacion=" + habitacion + ", fechaDeEntrada="
+				+ fechaDeEntrada + ", fechaDeSalida=" + fechaDeSalida + "]";
 	}
 	
 

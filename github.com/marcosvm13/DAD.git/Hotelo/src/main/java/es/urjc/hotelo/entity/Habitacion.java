@@ -1,16 +1,16 @@
 package es.urjc.hotelo.entity;
 
 
-import java.time.LocalDate;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -43,8 +43,8 @@ public class Habitacion {
 	
 	private String tamayo;
 	
-	
-	private HashSet<LocalDate> ocupacion;
+    @Column(length = 16777215)
+	private HashSet<String> ocupacion;
 	
 	//private List<MultipartFile> imagenes;
 	
@@ -66,11 +66,11 @@ public class Habitacion {
 		ocupacion = new HashSet<>();
 	}
 
-	public HashSet<LocalDate> getOcupacion() {
+	public HashSet<String> getOcupacion() {
 		return ocupacion;
 	}
 
-	public void setOcupacion(HashSet<LocalDate> ocupacion) {
+	public void setOcupacion(HashSet<String> ocupacion) {
 		this.ocupacion = ocupacion;
 	}
 

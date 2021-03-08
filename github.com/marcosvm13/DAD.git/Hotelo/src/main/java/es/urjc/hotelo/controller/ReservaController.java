@@ -26,7 +26,7 @@ import es.urjc.hotelo.repository.ReservaRepository;
 public class ReservaController {
 
 	
-	
+	private DateTimeFormatter format2 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 	 
 	 @Autowired
 	 private HuespedRepository huespedes;
@@ -50,26 +50,28 @@ public class ReservaController {
 	@GetMapping("/reservaCompleta/{id}/{fechaI}/{fechaF}")
 	public String reservaCompleta(Model model, Optional<Habitacion> habitacion, @PathVariable long id, @PathVariable String fechaI, @PathVariable String fechaF) {		
 		habitacion= habitaciones.findById(id);
-		HashSet<LocalDate> ocupacion= habitacion.get().getOcupacion();
+		HashSet<String> ocupacion= habitacion.get().getOcupacion();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate dateI = null;
 		LocalDate dateF = null;
 		dateI = LocalDate.parse(fechaI, format);
 		dateF = LocalDate.parse(fechaF, format);
 		for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-			if(ocupacion.contains(d)) {
+			if(ocupacion.contains(d.format(format2))) {
 				model.addAttribute("mal", true);
 				return "ConfirmarReserva";
 			}
 		}
 		for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-			ocupacion.add(d);
+			
+			String text = d.format(format2);
+			ocupacion.add(text);
 		}
 					
 		Optional<Huesped> usu = huespedes.findById((long) 1);
 							
 		Reserva reserva = new Reserva(usu.get(), habitacion.get(), fechaI, fechaF);
-					
+		System.out.println(reserva);			
 		reservas.save(reserva);
 		model.addAttribute("reserva",reserva);
 		return "ConfirmarReserva";
@@ -97,7 +99,8 @@ public class ReservaController {
 		LocalDate dateI = LocalDate.parse(r.getFechaDeEntrada(), format);
 		LocalDate dateF = LocalDate.parse(r.getFechaDeSalida(), format);	
 		for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-			h.getOcupacion().remove(d);
+		
+			h.getOcupacion().remove(d.format(format2));
 		}
 		h.getReservas().remove(r);
 		habitaciones.save(h);
