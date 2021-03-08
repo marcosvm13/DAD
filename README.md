@@ -54,7 +54,7 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 
 ![Principal](https://user-images.githubusercontent.com/47868021/110248880-87b9cf00-7f73-11eb-904f-d5f156e3a190.jpeg)
 
-Página principal de la aplicación web. Muestra los hoteles en los que puedes reservar
+Página principal de la aplicación web. Muestra los hoteles en los que puedes reservar.
 
 - ### Principal2.html
 
@@ -91,7 +91,7 @@ Página usada para la confirmación de la reserva del huesped.
 
 ![MisReservas](https://user-images.githubusercontent.com/47868021/110249093-a5d3ff00-7f74-11eb-84d2-666190b7b306.jpeg)
 
-Página que muestra las reservas que ha hecho el huesped.
+Página que muestra las reservas e información del huesped.
 
 - ### InsertarHotel.html
 
@@ -127,6 +127,24 @@ Página que se utiliza para iniciar sesión de un huesped. (En progreso)
 
 
 ## Diagrama de Navegación
+- Visualización de hoteles y actividades. Añadido de habitaciones y actividades a hoteles.
+![Graph6](https://user-images.githubusercontent.com/47868021/110363025-53611400-8042-11eb-842b-a527ac9c9237.jpeg)
+
+- Creación de hoteles junto con inserción de habitaciones y actividades.
+![Graph_3](https://user-images.githubusercontent.com/47868021/110362928-34628200-8042-11eb-8298-afb058bd24af.png)
+
+- Creación de reserva
+![Graph4](https://user-images.githubusercontent.com/47868021/110362986-480de880-8042-11eb-85c7-1d722c5cf0c0.jpeg)
+
+- Enlace de botones de cabecera.
+![Graph5](https://user-images.githubusercontent.com/47868021/110363002-4cd29c80-8042-11eb-9c88-f08b8eaf2c32.jpeg)
 
 
+## Diagrama UML
+
+![UML](https://user-images.githubusercontent.com/47868021/110364038-966fb700-8043-11eb-81b6-1bef3092f9ad.jpeg)
+
+
+## Diagrama E/R
+![E-R](https://user-images.githubusercontent.com/47868021/110364188-c0c17480-8043-11eb-9c71-bf02b3278c59.jpeg)
 
