@@ -148,3 +148,4 @@ Página que se utiliza para iniciar sesión de un huesped. (En progreso)
 ## Diagrama E/R
 ![E-R](https://user-images.githubusercontent.com/47868021/110364188-c0c17480-8043-11eb-9c71-bf02b3278c59.jpeg)
 
+![Diagrama ER](https://user-images.githubusercontent.com/61868600/110465310-89e76f00-80d4-11eb-989b-aeeef7b4c663.png)
