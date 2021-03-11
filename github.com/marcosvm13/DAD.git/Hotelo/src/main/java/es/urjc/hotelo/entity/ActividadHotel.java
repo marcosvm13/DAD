@@ -44,7 +44,6 @@ public class ActividadHotel{
 	    this.hoteles = new ArrayList<Hotel>();
 	}
 
-
 	public long getId() {
 		return id;
 	}
@@ -89,7 +88,4 @@ public class ActividadHotel{
 				+ ", getDescripcion()=" + getDescripcion() + ", getPlazas()=" + getPlazas() + "]";
 	}
 
-	
-	
-	
 }

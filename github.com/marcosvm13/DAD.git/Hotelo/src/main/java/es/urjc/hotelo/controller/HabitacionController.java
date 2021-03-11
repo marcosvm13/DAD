@@ -25,8 +25,6 @@ import es.urjc.hotelo.repository.HotelRepository;
 @Controller
 public class HabitacionController {
 	
-	private DateTimeFormatter format2 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-	
 	@Autowired
 	private HotelRepository hoteles;
 	 	 
@@ -44,10 +42,10 @@ public class HabitacionController {
 		HashMap<String, Habitacion> tipos = new HashMap<>();
 			
 		for(Habitacion h: hoteles.findById(id).get().getHabitaciones()) {
-			HashSet<String> ocupacion= h.getOcupacion();
+			HashSet<LocalDate> ocupacion= h.getOcupacion();
 			boolean esta = false;
 			for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
-				if(ocupacion.contains(d.format(format2))) {
+				if(ocupacion.contains(d)) {
 					esta = true;
 				}
 			}

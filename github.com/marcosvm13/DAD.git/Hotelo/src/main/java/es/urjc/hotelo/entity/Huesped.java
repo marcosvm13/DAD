@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Huesped {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -37,6 +36,7 @@ public class Huesped {
 
 	@OneToMany(mappedBy="huesped")
 	private List<Reserva> reserva;
+	
 	
 	public Huesped() {
 		
@@ -94,6 +94,5 @@ public class Huesped {
 	public void setReservas(List<Reserva> reservas) {
 		this.reserva = reservas;
 	}
-	
 	
 }

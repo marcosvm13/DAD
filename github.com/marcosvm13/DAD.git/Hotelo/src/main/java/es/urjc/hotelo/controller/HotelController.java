@@ -65,8 +65,8 @@ public class HotelController {
 		 
 		actividades.save(ah1);
 	 	 
-		Habitacion ha1 = new Habitacion(34, h1, "40x40" );
-		Habitacion ha2 = new Habitacion(35, h1, "300x300" );
+		Habitacion ha1 = new Habitacion(34, h1, "40x40");
+		Habitacion ha2 = new Habitacion(35, h1, "300x300");
 		Habitacion ha3 = new Habitacion(02, h2, "20x20");
 		 
 		habitaciones.save(ha1);
@@ -75,7 +75,7 @@ public class HotelController {
 	}
 
 	 
-	@RequestMapping(value={"/", "principalHoteles"})
+	@RequestMapping(value={"/", "/principalHoteles"})
 	public String greeting(Model model) {
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
@@ -129,12 +129,6 @@ public class HotelController {
 		hoteles.deleteById(id);
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
-	}
-	
-	
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "InicioSesion";
 	}
 	
 }

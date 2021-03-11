@@ -27,15 +27,11 @@ public class Reserva {
 	@ManyToOne
 	private Habitacion habitacion;
 	
-	
-	
-	
 	private String fechaDeEntrada;
+	
 	private String fechaDeSalida;
 	
 
-	
-	
 	public Reserva() {
 		
 	}
@@ -57,8 +53,6 @@ public class Reserva {
 	public Huesped getHuesped() {
 		return huesped;
 	}
-	
-	
 
 	public void setHuesped(Huesped huesped) {
 		this.huesped = huesped;
@@ -72,9 +66,6 @@ public class Reserva {
 		this.habitacion = habitacion;
 	}
 	
-	
-	
-
 	public String getFechaDeEntrada() {
 		return fechaDeEntrada;
 	}
@@ -90,13 +81,5 @@ public class Reserva {
 	public void setFechaDeSalida(String fechaDeSalida) {
 		this.fechaDeSalida = fechaDeSalida;
 	}
-
-	@Override
-	public String toString() {
-		return "Reserva [id=" + id + ", huesped=" + huesped + ", habitacion=" + habitacion + ", fechaDeEntrada="
-				+ fechaDeEntrada + ", fechaDeSalida=" + fechaDeSalida + "]";
-	}
 	
-
-		
 }

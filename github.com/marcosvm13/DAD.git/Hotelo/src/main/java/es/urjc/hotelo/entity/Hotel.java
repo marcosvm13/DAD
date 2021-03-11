@@ -111,6 +111,4 @@ public class Hotel {
 		return "Hotel [id=" + id + ", nombreHotel=" + nombreHotel + ", direccion=" + direccion + ", estrellas=" + estrellas + "]";
 	}
 	
-	
-	
 }

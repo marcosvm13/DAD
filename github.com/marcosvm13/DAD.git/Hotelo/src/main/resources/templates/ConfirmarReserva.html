@@ -6,18 +6,20 @@
  
 <br>
 <div class="container p-5">
-{{#mal}}
-	<h1>Habitación ya no disponible por favor vuelve a intentarlo</h1>
-{{/mal}}
-{{^mal}}
-{{#reserva}}
-	<h2> Confirmacion de la reserva  </h2><br>
+
+	{{#mal}}
+		<h2>Habitación ya no disponible por favor vuelva a intentarlo.</h2>
+	{{/mal}}
 	
-	<h4>Fecha de entrada: {{fechaDeEntrada}}</h4>
-	<h4>Fecha de salida: {{fechaDeSalida}}</h4>
+	{{^mal}}
+		{{#reserva}}
+		<h2> Confirmacion de la reserva  </h2><br>
+	
+		<h4>Fecha de entrada: {{fechaDeEntrada}}</h4>
+		<h4>Fecha de salida: {{fechaDeSalida}}</h4>
 		
-{{/reserva}}
-{{/mal}}
+		{{/reserva}}
+	{{/mal}}
 
 <br><br>
   	<form action="/" method="get">
