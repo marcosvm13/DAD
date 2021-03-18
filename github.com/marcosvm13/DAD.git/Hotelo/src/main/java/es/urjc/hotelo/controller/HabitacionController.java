@@ -36,6 +36,8 @@ public class HabitacionController {
 	@PostMapping("/buscarHabitacion/{id}")
 	public String buscarHabitacion(Model model, Optional<Hotel> Hotel, 
 			@PathVariable long id, @RequestParam String fechaI, @RequestParam String fechaF, HttpServletRequest request) {		
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate dateI = null;
 		LocalDate dateF = null;
@@ -55,9 +57,7 @@ public class HabitacionController {
 				tipos.put(h.getTamayo(), h);
 			}
 		}
-		
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-			
+					
 		if(!tipos.isEmpty()) {
 				
 			model.addAttribute("fechaI", fechaI);
@@ -72,46 +72,50 @@ public class HabitacionController {
 	
 	@PostMapping(value="/nuevaHabitacion/{id}", params="terminar")
 	public String nuevaHabitacionTerminar(Model model, @PathVariable Long id,  @RequestParam String numero, @RequestParam String tamayo, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Hotel hotel = hoteles.findById(id).get();
 		Habitacion h = new Habitacion(Integer.parseInt(numero), hotel, tamayo);
 		hotel.getHabitaciones().add(h);
 		habitaciones.save(h);
 		model.addAttribute("hoteles", hoteles.findAll());
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "Principal";
 	}
 	
 	
 	@PostMapping(value="/nuevaHabitacion/{id}", params="otra")
 	public String nuevaHabitacionSeguir(Model model, @PathVariable Long id,  @RequestParam String numero, @RequestParam String tamayo, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Hotel hotel = hoteles.findById(id).get();
 		Habitacion h = new Habitacion(Integer.parseInt(numero), hotel, tamayo);
 		hotel.getHabitaciones().add(h);
 		habitaciones.save(h);
 		model.addAttribute("nombreHotel", hotel.getNombreHotel());
 		model.addAttribute("id", hotel.getId());
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "AyadirHabitaciones";
 	}
 	
 	
 	@GetMapping("/nuevaHabitacion2/{id}")
 	public String nuevaHabitacion2(Model model, @PathVariable Long id, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Hotel h = hoteles.findById(id).get();
 		model.addAttribute("nombreHotel", h.getNombreHotel());
 		model.addAttribute("id", h.getId());
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "AyadirHabitaciones";
 	}
 	
 	
 	@GetMapping("/eliminarHabitacion/{id}")
 	public String eliminarActividad(Model model, @PathVariable Long id, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Habitacion a = habitaciones.findById(id).get();
 		Hotel h = a.getHotel();
 		habitaciones.deleteById(id);
 		model.addAttribute("hotel", h);
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "Hotel";
 	}
 	

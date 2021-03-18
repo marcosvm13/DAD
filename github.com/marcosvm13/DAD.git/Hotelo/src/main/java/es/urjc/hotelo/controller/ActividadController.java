@@ -34,16 +34,18 @@ public class ActividadController {
 	 
 	@RequestMapping("/principalActividades")
 	public String principalActividades(Model model, HttpServletRequest request) {
-		model.addAttribute("actividades", actividades.findAll());
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		model.addAttribute("actividades", actividades.findAll());
 		return "Principal2";
 	}
 	
 	
 	@GetMapping("/actividad/{id}")
 	public String actividad(Model model, Optional<ActividadHotel> actividad, @PathVariable long id, HttpServletRequest request) {
-		actividad = actividades.findById(id);
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		actividad = actividades.findById(id);
 		model.addAttribute("actividad", actividad.get());
 		return "actividad";
 	}
@@ -51,14 +53,16 @@ public class ActividadController {
 	
 	@GetMapping("/crearActividad")
 	public String crearActividad(Model model, HttpServletRequest request) {
-		model.addAttribute("hoteles", hoteles.findAll());
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		model.addAttribute("hoteles", hoteles.findAll());
 		return "InsertarActividad";
 	}
 	
 	
 	@PostMapping("/actividadCreada")
 	public String creadoActividad(Model model, @RequestParam String nombre, @RequestParam String aforo, @RequestParam String descripcion, @RequestParam(required = false) String[] hotelesActividad, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		if(hotelesActividad == null) {
 			model.addAttribute("actividades", actividades.findAll());
@@ -85,8 +89,9 @@ public class ActividadController {
 	
 	@GetMapping("/nuevaActividad/{id}")
 	public String nuevaActividad(Model model, @PathVariable Long id, HttpServletRequest request) {
-		Hotel h = hoteles.findById(id).get();
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		Hotel h = hoteles.findById(id).get();
 		model.addAttribute("nombreHotel", h.getNombreHotel());
 		model.addAttribute("id", h.getId());
 		List<ActividadHotel> actividadLista = new LinkedList<>();
@@ -102,6 +107,7 @@ public class ActividadController {
 	
 	@PostMapping("/actividadAyadida/{id}")
 	public String actividadAyadida(Model model, @PathVariable Long id,  @RequestParam(required = false) String[] actividadesHotel, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Hotel h = hoteles.findById(id).get();
 		if(actividadesHotel != null) {
@@ -113,7 +119,6 @@ public class ActividadController {
 			}
 			hoteles.save(h);
 		}
-		
 		model.addAttribute("hotel", h);
 		return "hotel";
 	}
@@ -121,6 +126,7 @@ public class ActividadController {
 	
 	@GetMapping("/eliminarActividad/{id}")
 	public String eliminarActividad(Model model, @PathVariable Long id, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		ActividadHotel a = actividades.findById(id).get();
 		for(Hotel h: a.getHoteles()) {
