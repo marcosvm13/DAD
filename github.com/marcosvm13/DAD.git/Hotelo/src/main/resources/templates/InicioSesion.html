@@ -4,17 +4,20 @@
 		<br>
 		<div class="container p-5">
 		<div class="row"> 
-		<form action="/" method="post">
+		<form action="/login" method="post">
 			<label for="fechaI">Nombre de usuario: </label>
 			<input type="text" class="form-control" name="username"><br>
 			<label for="fechaF">Contrasenya: </label>
 			<input type="text" class="form-control" name="password"> 
 			<br>
 			<input class="btn btn-danger"  type="submit" value="Iniciar sesion">
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 		</div>
 		<br>
-	
+	{{#error}}
+	<h4 class="fw-light">Usuario o contrasenya incorrectos. Intentelo de nuevo.</h4>
+	{{/error}}
 		</div>
 		<br>
 	<br>
