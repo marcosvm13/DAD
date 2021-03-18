@@ -16,6 +16,7 @@
 			<input type="date" class="form-control" name="fechaF"  data-toggle="tooltip" data-placement="top" title="dd-mm-aaaa" required> 
 			<br>
 			<input class="btn btn-danger"  type="submit" value="Buscar">
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 		</div>
 		<br>
@@ -32,57 +33,11 @@
 			<h2> Reserva de la habitacion {{numero}}.</h2>
 			<h4>De tamanyo {{tamayo}}</h4>
 		
-	<!--{{#premium}}
-		
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
-				
-			    <h5 class="card-title">{{nombre}}</h5>
-			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
-			    
-		    </div>
-		    
-		    </div>
-
-
-	{{/premium}}
-	{{#medio}}
-		
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
-				
-			    <h5 class="card-title">{{nombre}}</h5>
-			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
-			    
-		    </div>
-		    
-		    </div>
-
-
-	{{/medio}}
-	{{#basico}}
-		
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
-				
-			    <h5 class="card-title">{{nombre}}</h5>
-			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
-			    
-		    </div>
-		    
-		    </div>
-
-
-	{{/basico}}
-	<div>
-	
-	<br>
-	<br>
-		  -->
 		  	
 		  
 		<form action="/reservaCompleta/{{id}}/{{fechaI}}/{{fechaF}}" method="get">
 			<input class="btn btn-danger"  type="submit" value="Reservar">
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 			<div name="" data-value="valor"></div>
 		</form>
 		{{/habitacion}}

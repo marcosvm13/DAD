@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,15 +42,21 @@ public class ReservaController {
 	 
 
 	@GetMapping("/reserva/{id}")
-	public String reserva(Model model, Optional<Hotel> Hotel, @PathVariable long id) {		
+	public String reserva(Model model, HttpServletRequest request, Optional<Hotel> Hotel, @PathVariable long id) {		
 		model.addAttribute("id", id);
 		model.addAttribute("primero", true);
+		
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		
 		return "reserva";
 	}
 		
 	
 	@GetMapping("/reservaCompleta/{id}/{fechaI}/{fechaF}")
-	public String reservaCompleta(Model model, Optional<Habitacion> habitacion, @PathVariable long id, @PathVariable String fechaI, @PathVariable String fechaF) {		
+	public String reservaCompleta(Model model, HttpServletRequest request, Optional<Habitacion> habitacion, @PathVariable long id, @PathVariable String fechaI, @PathVariable String fechaF) {		
+		
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		
 		habitacion= habitaciones.findById(id);
 		HashSet<LocalDate> ocupacion= habitacion.get().getOcupacion();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -77,19 +85,21 @@ public class ReservaController {
 		
 	
 	@GetMapping("/misReservas")
-	public String misReservas(Model model) {
+	public String misReservas(Model model, HttpServletRequest request) {
 			
 		Optional<Huesped> usu = huespedes.findById((long) 1);
 			
 		model.addAttribute("huesped", usu.get());
 		model.addAttribute("reservas",usu.get().getReservas());
-			
+		
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));	
+		
 		return "MisReservas";
 	}
 		
 	
 	@GetMapping("/eliminarReserva/{id}")
-	public String eliminarReserva(Model model, @PathVariable Long id) {
+	public String eliminarReserva(Model model, HttpServletRequest request, @PathVariable Long id) {
 			
 		Reserva r = reservas.findById(id).get();
 		Habitacion h = r.getHabitacion();
@@ -106,7 +116,9 @@ public class ReservaController {
 			
 		model.addAttribute("huesped", usu.get());
 		model.addAttribute("reservas",usu.get().getReservas());
-			
+		
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		
 		return "MisReservas";
 	}
 }

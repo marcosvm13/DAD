@@ -25,9 +25,7 @@
 			    	<h5 class="card-title">{{nombreHotel}}</h5>
 			     	<h6 class="card-subtitle mb-2 text-muted">{{direccion}}</h6>
 			    	<p class="card-text">{{estrellas}}</p>
-			    <!--  <form action="hotel/{{id}}">
-			    	<input type='submit' value='Enviar'/>
-			    </form>-->
+
 			    	<a href="/hotel/{{id}}" class="card-link">Info</a> 
 			   
 		    		</div>
@@ -47,10 +45,12 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<form action="/eliminarActividad/{{id}}" method="get">
 				<input class="btn btn-danger"  type="submit" value="Eliminar">
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>
 
 		<form action="/principalActividades" method="get">
 			<input class="button"  type="submit" value="Volver a inicio">
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 		</div>
 		

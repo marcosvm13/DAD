@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,30 +77,33 @@ public class HotelController {
 
 	 
 	@RequestMapping(value={"/", "/principalHoteles"})
-	public String greeting(Model model) {
+	public String greeting(Model model,  HttpServletRequest request) {
 		model.addAttribute("hoteles", hoteles.findAll());
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "Principal";
 	}
 		
 	
 	@GetMapping("/hotel/{id}")
-	public String hotel(Model model, Optional<Hotel> hotel, @PathVariable long id) {
+	public String hotel(Model model, Optional<Hotel> hotel, @PathVariable long id,  HttpServletRequest request) {
 		hotel = hoteles.findById(id);
 		model.addAttribute("hotel", hotel.get());
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "hotel";
 	}
 	
 	
 	@GetMapping("/crearHotel")
-	public String crearHotel(Model model) {
+	public String crearHotel(Model model,  HttpServletRequest request) {
 		model.addAttribute("actividades", actividades.findAll());
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "InsertarHotel";
 	}
 	
 
 	@PostMapping("/hotelCreado")
-	public String creadoHotel(Model model, @RequestParam String nombre, @RequestParam String localidad, @RequestParam String direccion, @RequestParam String estrellas,  @RequestParam(required = false) String[] actividadesHotel) {
-		
+	public String creadoHotel(Model model, @RequestParam String nombre, @RequestParam String localidad, @RequestParam String direccion, @RequestParam String estrellas,  @RequestParam(required = false) String[] actividadesHotel,  HttpServletRequest request) {
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Hotel h = new Hotel(nombre, localidad, direccion, Integer.parseInt(estrellas));
 		if(actividadesHotel != null) {
 			for(String a: actividadesHotel) {
@@ -111,13 +115,13 @@ public class HotelController {
 		}
 		hoteles.save(h);
 		model.addAttribute("nombreHotel", h.getNombreHotel());
-		model.addAttribute("id", h.getId());
+		model.addAttribute("id", h.getId());		
 		return "AyadirHabitaciones";
 	}
 	
 	
 	@GetMapping("/eliminarHotel/{id}")
-	public String eliminarHotel(Model model, @PathVariable Long id) {
+	public String eliminarHotel(Model model, @PathVariable Long id,  HttpServletRequest request) {
 		Hotel h = hoteles.findById(id).get();
 		for(ActividadHotel a: h.getActividades()) {
 			a.getHoteles().remove(h);
@@ -125,7 +129,7 @@ public class HotelController {
 		}
 		h.getActividades().clear();
 		hoteles.save(h);
-		
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		hoteles.deleteById(id);
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
