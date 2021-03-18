@@ -3,19 +3,21 @@ package es.urjc.hotelo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HuespedController {
 	
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String loginGet(Model model) {
+		model.addAttribute("error", false);
 		return "InicioSesion";
 	}
-
 	 
 	@GetMapping("/loginerror")
-	public String loginerror() {
-		return "loginerror"; 
+	public String loginerror(Model model) {
+		model.addAttribute("error", true);
+		return "InicioSesion"; 
 	}
 	
 	@GetMapping("/logout")
