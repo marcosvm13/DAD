@@ -78,32 +78,36 @@ public class HotelController {
 	 
 	@RequestMapping(value={"/", "/principalHoteles"})
 	public String greeting(Model model,  HttpServletRequest request) {
-		model.addAttribute("hoteles", hoteles.findAll());
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
 	}
 		
 	
 	@GetMapping("/hotel/{id}")
 	public String hotel(Model model, Optional<Hotel> hotel, @PathVariable long id,  HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		hotel = hoteles.findById(id);
 		model.addAttribute("hotel", hotel.get());
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		return "hotel";
 	}
 	
 	
 	@GetMapping("/crearHotel")
 	public String crearHotel(Model model,  HttpServletRequest request) {
-		model.addAttribute("actividades", actividades.findAll());
+		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		model.addAttribute("actividades", actividades.findAll());
 		return "InsertarHotel";
 	}
 	
 
 	@PostMapping("/hotelCreado")
 	public String creadoHotel(Model model, @RequestParam String nombre, @RequestParam String localidad, @RequestParam String direccion, @RequestParam String estrellas,  @RequestParam(required = false) String[] actividadesHotel,  HttpServletRequest request) {
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));		
 		Hotel h = new Hotel(nombre, localidad, direccion, Integer.parseInt(estrellas));
 		if(actividadesHotel != null) {
 			for(String a: actividadesHotel) {
@@ -121,7 +125,9 @@ public class HotelController {
 	
 	
 	@GetMapping("/eliminarHotel/{id}")
-	public String eliminarHotel(Model model, @PathVariable Long id,  HttpServletRequest request) {
+	public String eliminarHotel(Model model, @PathVariable Long id, HttpServletRequest request) {
+		model.addAttribute("user", request.isUserInRole("USER"));
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Hotel h = hoteles.findById(id).get();
 		for(ActividadHotel a: h.getActividades()) {
 			a.getHoteles().remove(h);
@@ -129,7 +135,6 @@ public class HotelController {
 		}
 		h.getActividades().clear();
 		hoteles.save(h);
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		hoteles.deleteById(id);
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
