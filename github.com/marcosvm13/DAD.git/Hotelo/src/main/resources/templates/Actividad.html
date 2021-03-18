@@ -41,13 +41,13 @@
 		{{/actividad}}
 		
 		<br><br>
-		
+		{{#admin}}
 		<div class="d-flex justify-content-between align-items-center">
 			<form action="/eliminarActividad/{{id}}" method="get">
 				<input class="btn btn-danger"  type="submit" value="Eliminar">
 				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>
-
+		{{/admin}}
 		<form action="/principalActividades" method="get">
 			<input class="button"  type="submit" value="Volver a inicio">
 			<input type="hidden" name="_csrf" value="{{token}}"/>

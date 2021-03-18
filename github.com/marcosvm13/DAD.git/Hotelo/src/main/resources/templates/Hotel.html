@@ -71,7 +71,7 @@
 	{{/hotel}}
 	
 	<br><br>
-	
+	{{#admin}}
 	<div class="d-flex justify-content-between align-items-center">
 	<form action="/nuevaHabitacion2/{{id}}" method="get">
 		<input class="btn btn-sm btn-outline-secondary"  type="submit"  value="Nueva Habitación">
@@ -82,17 +82,19 @@
 		<input class="btn btn-sm btn-outline-secondary"  type="submit"  value="Nueva Actividad">
 		<input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
-
+{{/admin}}
+{{#user}}	
 	<form action="/reserva/{{id}}" method="get">
 		<input class="btn btn-sm btn-outline-secondary"  type="submit" value="Reservar">
 		<input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
-
+{{/user}}
+{{#admin}}
 	<form action="/eliminarHotel/{{id}}" method="get">
 		<input class="btn btn-danger"  type="submit" value="Eliminar">
 		<input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
-
+{{/admin}}
   	<form action="/" method="get">
 		<input class="button"  type="submit" value="Volver a inicio">
 		<input type="hidden" name="_csrf" value="{{token}}"/>
