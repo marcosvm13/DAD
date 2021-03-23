@@ -49,11 +49,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
-          {{^user}}
+		{{#user}}
           <li class="nav-item">
             <a class="nav-link active" href="/misReservas">Mis Reservas</a>
           </li>
-          {{/user}}
+		{{/user}}
         {{#admin}}
           <li class="nav-item">
             <a class="nav-link active" href="/crearHotel">Ayadir Hoteles</a>
@@ -61,14 +61,17 @@
           <li class="nav-item">
             <a class="nav-link active" href="/crearActividad">Ayadir Actividades</a>
           </li>
-          {{/admin}}
-       		{{^user}}
-       		{{^admin}}
+		{{/admin}}
+		{{^user}}
           <li class="nav-item">
             <a class="nav-link active" href="/login">Iniciar sesión</a>
           </li>
-          {{/admin}}
-          {{/user}}
+		{{/user}}
+		{{#user}}
+			<li class="nav-item">
+            <a class="nav-link active" href="/logout">Cerrar sesión</a>
+          </li>
+		{{/user}}
         </ul>
         
       </div>
