@@ -2,6 +2,7 @@ package es.urjc.hotelo.configuration;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
-	/*@Bean
+	@Autowired
+	public HuespedRepositoryAuthenticationProvider authenticationProvider;
+	
+	@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }*/
+    }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -51,18 +55,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
 		
-		// Disable CSRF at the moment
-		http.csrf().disable();
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		// User
 		
-		auth.inMemoryAuthentication().withUser("user").password("{noop}pass").roles("USER");
-		
-		auth.inMemoryAuthentication().withUser("admin").password("{noop}adminpass").roles("USER", "ADMIN");
+		// Database authentication provider
+		auth.authenticationProvider(authenticationProvider);
 
 	}
 	

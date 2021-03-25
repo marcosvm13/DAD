@@ -1,6 +1,8 @@
 package es.urjc.hotelo.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -8,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +45,9 @@ public class HotelController {
 	 
 	@Autowired
 	private HabitacionRepository habitaciones;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	 
 	@PostConstruct
 	public void init() {
@@ -52,9 +58,12 @@ public class HotelController {
 		Hotel h2 = new Hotel("Pago bien", "C/ Ni idea", "Barcelona", 2);
 		Hotel h3 = new Hotel("Tercer hotel", "C/ 9º B", "Cadiz",3);
 		Hotel h4 = new Hotel("Cuarto hotel", "C/ asdasdas", "Madrid", 4);
-		 
-		Huesped usuario1 = new Huesped("Huesped 1", "Apellido1" , 111111111, "huesped1@gmail.com");
+		
+		Huesped usuario1 = new Huesped("user", "Apellido1" , 111111111, "huesped1@gmail.com", null, passwordEncoder.encode("pass"), "USER");
+		Huesped usuario2 = new Huesped("admin", "ApellidoAdmin" , 695596728, "adminSecreto@gmail.com", null, passwordEncoder.encode("adminpass"), "USER", "ADMIN");
+		
 		huespedes.save(usuario1);
+		huespedes.save(usuario2);
 		 
 		ah1.getHoteles().add(h1);
 		h1.getActividades().add(ah1);

@@ -3,7 +3,9 @@ package es.urjc.hotelo.entity;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +22,11 @@ public class Huesped {
 	/*
 	 * Nombre
 	 * Apellidos
-	 * Contraseya
 	 * Telefono
 	 * Correo electrónico
 	 * Lista de reservas asociadas
+	 * Contraseya
+	 * Roles
 	 */
 	
 	private String nombreHuesped;
@@ -37,9 +40,21 @@ public class Huesped {
 	@OneToMany(mappedBy="huesped")
 	private List<Reserva> reserva;
 	
+	private String hashContraseya;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
+	
 	
 	public Huesped() {
 		
+	}
+
+	public Huesped(String nombreHuesped, String hashContraseya, List<String> roles) {
+		super();
+		this.nombreHuesped = nombreHuesped;
+		this.hashContraseya = hashContraseya;
+		this.roles = roles;
 	}
 
 	public Huesped(String nombreHuesped, String apellidos, long telefono, String correo) {
@@ -49,6 +64,18 @@ public class Huesped {
 		this.telefono = telefono;
 		this.correo = correo;
 		this.reserva = new LinkedList<>();;
+	}
+
+	public Huesped(String nombreHuesped, String apellidos, long telefono, String correo, List<Reserva> reserva,
+			String hashContraseya, String... roles) {
+		super();
+		this.nombreHuesped = nombreHuesped;
+		this.apellidos = apellidos;
+		this.telefono = telefono;
+		this.correo = correo;
+		this.reserva = reserva;
+		this.hashContraseya = hashContraseya;
+		this.roles = List.of(roles);
 	}
 
 	public long getId() {
@@ -94,5 +121,13 @@ public class Huesped {
 	public void setReservas(List<Reserva> reservas) {
 		this.reserva = reservas;
 	}
-	
+
+	public String getHashContraseya() {
+		return hashContraseya;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
 }
