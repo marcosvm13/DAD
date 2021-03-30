@@ -1,8 +1,6 @@
 package es.urjc.hotelo.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -59,7 +57,7 @@ public class HotelController {
 		Hotel h3 = new Hotel("Tercer hotel", "C/ 9º B", "Cadiz",3);
 		Hotel h4 = new Hotel("Cuarto hotel", "C/ asdasdas", "Madrid", 4);
 		
-		Huesped usuario1 = new Huesped("user", "Apellido1" , 111111111, "huesped1@gmail.com", null, passwordEncoder.encode("pass"), "USER");
+		Huesped usuario1 = new Huesped("user", "Apellido1" , 111111111, "davidpayanca@gmail.com", null, passwordEncoder.encode("pass"), "USER");
 		Huesped usuario2 = new Huesped("admin", "ApellidoAdmin" , 695596728, "adminSecreto@gmail.com", null, passwordEncoder.encode("adminpass"), "USER", "ADMIN");
 		
 		huespedes.save(usuario1);
