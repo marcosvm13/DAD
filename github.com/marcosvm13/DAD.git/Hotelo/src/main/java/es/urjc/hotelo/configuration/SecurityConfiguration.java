@@ -1,5 +1,7 @@
 package es.urjc.hotelo.configuration;
 
+import java.security.SecureRandom;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	public HuespedRepositoryAuthenticationProvider authenticationProvider;
+	RepositoryHuespedDetailsService userDetailsService;
 	
 	@Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10, new SecureRandom());
     }
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		// Database authentication provider
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -57,13 +67,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 	}
 	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		// Database authentication provider
-		auth.authenticationProvider(authenticationProvider);
-
-	}
 	
 	
 	

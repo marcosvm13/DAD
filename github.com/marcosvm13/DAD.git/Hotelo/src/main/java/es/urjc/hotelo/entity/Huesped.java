@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Huesped {
 
@@ -40,6 +42,7 @@ public class Huesped {
 	@OneToMany(mappedBy="huesped")
 	private List<Reserva> reserva;
 	
+	@JsonIgnore
 	private String hashContraseya;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -120,6 +123,24 @@ public class Huesped {
 
 	public void setReservas(List<Reserva> reservas) {
 		this.reserva = reservas;
+	}
+
+	
+	
+	public List<Reserva> getReserva() {
+		return reserva;
+	}
+
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
+	}
+
+	public void setHashContraseya(String hashContraseya) {
+		this.hashContraseya = hashContraseya;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 	public String getHashContraseya() {

@@ -1,5 +1,7 @@
 package es.urjc.hotelo.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import es.urjc.hotelo.entity.Huesped;
@@ -8,7 +10,7 @@ import es.urjc.hotelo.entity.Reserva;
 
 public interface HuespedRepository extends JpaRepository<Huesped,Long>{
 
-	Huesped findByNombreHuesped(String nombreHuesped);
+	Optional<Huesped> findByNombreHuesped(String nombreHuesped);
 	
 	Huesped findByCorreo(String correo);
 	

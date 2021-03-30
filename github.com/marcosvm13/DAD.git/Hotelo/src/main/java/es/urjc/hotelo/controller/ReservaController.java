@@ -72,7 +72,7 @@ public class ReservaController {
 			ocupacion.add(d);
 		}
 					
-		Optional<Huesped> usu = huespedes.findById((long) 1);
+		Optional<Huesped> usu = huespedes.findByNombreHuesped(request.getUserPrincipal().getName());	
 							
 		Reserva reserva = new Reserva(usu.get(), habitacion.get(), fechaI, fechaF);
 					
@@ -86,7 +86,7 @@ public class ReservaController {
 	public String misReservas(Model model, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));	
-		Optional<Huesped> usu = huespedes.findById((long) 1);	
+		Optional<Huesped> usu = huespedes.findByNombreHuesped(request.getUserPrincipal().getName());	
 		model.addAttribute("huesped", usu.get());
 		model.addAttribute("reservas",usu.get().getReservas());
 		return "MisReservas";
@@ -108,7 +108,7 @@ public class ReservaController {
 		h.getReservas().remove(r);
 		habitaciones.save(h);
 		
-		Optional<Huesped> usu = huespedes.findById((long) 1);
+		Optional<Huesped> usu = huespedes.findByNombreHuesped(request.getUserPrincipal().getName());	
 		model.addAttribute("huesped", usu.get());
 		model.addAttribute("reservas",usu.get().getReservas());
 		return "MisReservas";
