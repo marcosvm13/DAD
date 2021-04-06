@@ -44,7 +44,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				"/hotel/{id}", 
 				"/actividad/{id}", 
 				"/login", 
-				"/loginerror" ).permitAll();
+				"/loginerror",
+				"/crearHuesped",
+				"/signup").permitAll();
 
 		
 		// Private pages (all other pages) 

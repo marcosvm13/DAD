@@ -58,7 +58,7 @@ public class HotelController {
 		Hotel h4 = new Hotel("Cuarto hotel", "C/ asdasdas", "Madrid", 4);
 		
 		Huesped usuario1 = new Huesped("user", "Apellido1" , 111111111, "davidpayanca@gmail.com", null, passwordEncoder.encode("pass"), "USER");
-		Huesped usuario2 = new Huesped("admin", "ApellidoAdmin" , 695596728, "adminSecreto@gmail.com", null, passwordEncoder.encode("adminpass"), "USER", "ADMIN");
+		Huesped usuario2 = new Huesped("admin", "ApellidoAdmin" , 695596728, "davidpayanca@gmail.com", null, passwordEncoder.encode("adminpass"), "USER", "ADMIN");
 		
 		huespedes.save(usuario1);
 		huespedes.save(usuario2);
