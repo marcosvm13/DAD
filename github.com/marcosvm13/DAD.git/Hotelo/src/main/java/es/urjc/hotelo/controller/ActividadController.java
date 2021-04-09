@@ -47,7 +47,7 @@ public class ActividadController {
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		actividad = actividades.findById(id);
 		model.addAttribute("actividad", actividad.get());
-		return "actividad";
+		return "Actividad";
 	}
 	
 	
@@ -120,7 +120,7 @@ public class ActividadController {
 			hoteles.save(h);
 		}
 		model.addAttribute("hotel", h);
-		return "hotel";
+		return "Hotel";
 	}
 	
 	
