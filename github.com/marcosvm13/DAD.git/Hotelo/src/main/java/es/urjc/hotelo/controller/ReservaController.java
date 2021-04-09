@@ -53,7 +53,7 @@ public class ReservaController {
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("id", id);
 		model.addAttribute("primero", true);
-		return "reserva";
+		return "Reserva";
 	}
 		
 	
