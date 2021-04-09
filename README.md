@@ -49,79 +49,96 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 
 ## Capturas de pantalla de la aplicación web
 
+### Páginas públicas
 
-- ### Principal.html
+- #### Principal.html
 
-![Principal](https://user-images.githubusercontent.com/47868021/110248880-87b9cf00-7f73-11eb-904f-d5f156e3a190.jpeg)
+![Principal](https://user-images.githubusercontent.com/61868600/114204165-28c3ed00-9959-11eb-9a86-60cf145fa027.png)
 
 Página principal de la aplicación web. Muestra los hoteles en los que puedes reservar.
 
-- ### Principal2.html
+- #### Principal2.html
 
-![Principal2](https://user-images.githubusercontent.com/47868021/110248896-9ef8bc80-7f73-11eb-839c-b98283f3d802.jpeg)
+![Principal2](https://user-images.githubusercontent.com/61868600/114204330-5c067c00-9959-11eb-8469-b0f5d9957cc1.png)
 
 Segunda página principal de la aplicación web. Muestra las actividades disponibles en los hoteles.
 
-- ### Hotel.html
+- #### InicioSesion.html
+
+![InicioSesion](https://user-images.githubusercontent.com/61868600/114204964-16967e80-995a-11eb-9654-ee3693ba98e4.png)
+
+Página que se utiliza para iniciar sesión de un huesped. Hay dos tipos de huéspedes, usuarios y administradores.
+
+- #### CrearHuesped.html
+
+![crearHuesped](https://user-images.githubusercontent.com/61868600/114205048-30d05c80-995a-11eb-99e8-6b73e41f0eed.png)
+
+Página que se utiliza para crear una cuenta. La cuenta creada es de usuario normal, no de administrador.
+
+- #### Hotel.html
  
-![InfoHotel](https://user-images.githubusercontent.com/47868021/110248908-aae47e80-7f73-11eb-941b-468b96bb8930.jpeg)
+![Hotel_user](https://user-images.githubusercontent.com/61868600/114204435-7a6c7780-9959-11eb-9175-8f5202d83d49.png)
 
-Página que muestra la información del hotel junto con las actividades y habitaciones disponibles.
+Página que muestra la información del hotel junto con las actividades y habitaciones disponibles. Los huéspedes que han iniciado sesión pueden hacer reservar una habitación a partir de esta página.
 
-- ### Actividad.html
+![Hotel_admin](https://user-images.githubusercontent.com/61868600/114204445-7e989500-9959-11eb-89ba-7bfc6be1466b.png)
 
-![InfoActividad](https://user-images.githubusercontent.com/47868021/110249017-29d9b700-7f74-11eb-8c16-3d8205b285b8.jpeg)
+Los administradores también pueden añadir actividades al hotel, añadir o eliminar habitaciones y eliminar el hotel de la aplicación.
+
+- #### Actividad.html
+
+![Actividad](https://user-images.githubusercontent.com/61868600/114206360-8d804700-995b-11eb-9f8b-6f54dbd278db.png)
 
 Página que muestra la información de la actividad y muestra que hoteles la tienen.
 
-- ### Reserva.html
+![Actividad_admin](https://user-images.githubusercontent.com/61868600/114206373-93762800-995b-11eb-99a9-796d20b4e616.png)
 
-![Elegir fechaI y fechaF](https://user-images.githubusercontent.com/47868021/110249052-58f02880-7f74-11eb-8f65-2e1277e2e338.jpeg)
-![ElegirHabitacion](https://user-images.githubusercontent.com/47868021/110249067-77562400-7f74-11eb-80b7-d7057905bcf5.jpeg)
+A los administradores les aparece la opción de eliminar la actividad de la aplicación.
 
-Pagina que se usa para crear la reserva en un hotel, primero eliges la fecha de inicio y final para posteriormente elegir en que habitación deseas hospedarte.
+### Páginas privadas
 
-- ### ConfirmarReserva.html
+- #### Reserva.html
 
-![ConfirmarReserva](https://user-images.githubusercontent.com/47868021/110249080-8e951180-7f74-11eb-8fbd-8cb890cc9391.jpeg)
+![Reserva](https://user-images.githubusercontent.com/61868600/114207086-48a8e000-995c-11eb-8a2a-d7dff37747d5.png)
+![Reserva2](https://user-images.githubusercontent.com/61868600/114207103-4ba3d080-995c-11eb-975d-bae777a9895c.png)
 
-Página usada para la confirmación de la reserva del huesped.
+Página que se usa para crear la reserva en un hotel, primero eliges la fecha de inicio y final para posteriormente elegir en que habitación deseas hospedarte. Al hacer una reserva se manda un correo a la cuenta de correo electrónico del usuario.
 
-- ### MisReservas.html
+- #### ConfirmarReserva.html
 
-![MisReservas](https://user-images.githubusercontent.com/47868021/110249093-a5d3ff00-7f74-11eb-84d2-666190b7b306.jpeg)
+![ConfirmarReserva](https://user-images.githubusercontent.com/61868600/114207182-637b5480-995c-11eb-8c59-80f08862aa02.png)
 
-Página que muestra las reservas e información del huesped.
+Página usada para la confirmación de la reserva del huésped.
 
-- ### InsertarHotel.html
+- #### MisReservas.html
 
-![AñadirHotel](https://user-images.githubusercontent.com/47868021/110249149-03684b80-7f75-11eb-9aef-b990f8e43dcd.jpeg)
+![MisReservas](https://user-images.githubusercontent.com/61868600/114207665-e7354100-995c-11eb-8b4c-4caf14a4be58.png)
 
-Página que sirve para añadir un hotel dentro de la base de datos de la aplicación.
+Página que muestra las reservas e información del huesped. Al eliminar una reserva se manda un correo a la cuenta de del usuario.
 
-- ### AyadirActividad.html
+- #### InsertarHotel.html
 
-![InsertarActividad](https://user-images.githubusercontent.com/47868021/110249218-740f6800-7f75-11eb-8d66-a6f8d58f648b.jpeg)
+![InsertarHotel](https://user-images.githubusercontent.com/61868600/114207785-0e8c0e00-995d-11eb-969c-416163781b6e.png)
 
-Página que sirve para añadir una actividad al hotel creado anteriormente.
+Página que sirve para añadir un hotel dentro de la base de datos de la aplicación. Solo tienen acceso a ella los administradores.
 
-- ### AyadirHabitación.html
+- #### AyadirActividad.html
 
-![AñadirHabitacion](https://user-images.githubusercontent.com/47868021/110249157-0b27f000-7f75-11eb-9d84-b447c36d8bfb.jpeg)
+![ayadirActividad](https://user-images.githubusercontent.com/61868600/114207996-472be780-995d-11eb-986f-277d94ac9a88.png)
 
-Pagina que añade habitaciones al hotel creado anteriormente.
+Página que sirve para añadir una actividad al hotel creado anteriormente. Solo tienen acceso a ella los administradores.
 
-- ### InsertarActividad.html
+- #### AyadirHabitación.html
 
-![AñadirActividad](https://user-images.githubusercontent.com/47868021/110249246-943f2700-7f75-11eb-8823-4546e84520ec.jpeg)
+![ayadirHabitacion](https://user-images.githubusercontent.com/61868600/114207901-28c5ec00-995d-11eb-93c4-0759b207c1b5.png)
 
-Página que crea una nueva actividad dentro de la base de datos de la aplicación.
+Pagina que añade habitaciones al hotel creado anteriormente. Solo tienen acceso a ella los administradores.
 
-- ### InicioSesion.html
+- #### InsertarActividad.html
 
-![Login](https://user-images.githubusercontent.com/47868021/110249319-e84a0b80-7f75-11eb-8f88-a5eca2245c21.jpeg)
+![InsertarActividad](https://user-images.githubusercontent.com/61868600/114207970-3e3b1600-995d-11eb-860d-4f0152160075.png)
 
-Página que se utiliza para iniciar sesión de un huesped. (En progreso)
+Página que crea una nueva actividad dentro de la base de datos de la aplicación. Solo tienen acceso a ella los administradores.
 
 
 
