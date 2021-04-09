@@ -98,7 +98,7 @@ public class HotelController {
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		hotel = hoteles.findById(id);
 		model.addAttribute("hotel", hotel.get());
-		return "hotel";
+		return "Hotel";
 	}
 	
 	
