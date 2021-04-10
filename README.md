@@ -156,6 +156,12 @@ Página que crea una nueva actividad dentro de la base de datos de la aplicació
 - Enlace de botones de cabecera.
 ![Graph5](https://user-images.githubusercontent.com/47868021/110363002-4cd29c80-8042-11eb-9c88-f08b8eaf2c32.jpeg)
 
+- Crear cuenta e inicio y fin de sesión.
+![Transicion usuarios](https://user-images.githubusercontent.com/61868600/114265910-b7854800-99f3-11eb-8e3e-01b5c0c51474.png)
+
+- Diagrama de navegación completo resumido.
+![Transicion de estados](https://user-images.githubusercontent.com/61868600/114265941-df74ab80-99f3-11eb-92d1-65e3fa2be3b4.png)
+
 
 ## Diagrama UML
 
