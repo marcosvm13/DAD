@@ -160,7 +160,7 @@ Página que crea una nueva actividad dentro de la base de datos de la aplicació
 ![Transicion usuarios](https://user-images.githubusercontent.com/61868600/114265910-b7854800-99f3-11eb-8e3e-01b5c0c51474.png)
 
 - Diagrama de navegación completo resumido.
-![Transicion de estados](https://user-images.githubusercontent.com/61868600/114265941-df74ab80-99f3-11eb-92d1-65e3fa2be3b4.png)
+![Transicion de estados](https://user-images.githubusercontent.com/61868600/114266139-e9e37500-99f4-11eb-8845-b97013dbfb2f.png)
 
 
 ## Diagrama UML
