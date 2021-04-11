@@ -172,3 +172,27 @@ Página que crea una nueva actividad dentro de la base de datos de la aplicació
 ![E-R](https://user-images.githubusercontent.com/47868021/110364188-c0c17480-8043-11eb-9c71-bf02b3278c59.jpeg)
 
 ![Diagrama ER](https://user-images.githubusercontent.com/61868600/110465310-89e76f00-80d4-11eb-989b-aeeef7b4c663.png)
+
+## Diagrama de Clases y Templates
+![Diagrama de clases y templates](https://user-images.githubusercontent.com/47868021/114309980-6788ad00-9ae9-11eb-8c58-aa20b9146f38.jpeg)
+
+## Instrucciones para desplegar la aplicación
+
+- En STS, click derecho en el proyecto y en Run As selecionas Maven Build.. , posteriormente aparecerá una ventana y en la opción Goals rellenar con **"clean package"** y selecionar Run. Luego en la carpeta Target de la aplicación aparecerá el .jar creado.
+ 
+- Crear una VM de Linux en la que primero utlizar en el terminal el comando "sudo apt update" para actualizar el paquete apt para luego instalar java JDK mediante el comando **"sudo apt install openjdk-11-jdk"**. 
+
+- Posteriormente instalar mysql-server o docker, en nuestro caso utilizaremos docker que contiene una imagen de mysql-server. Para ello primero usamos el comando **"sudo apt install apt-transport-https ca-certificates curl software-properties-common"** para instalar paquetes de requisitos previos que permitan a apt usar paquetes a través de HTTPS.
+ 
+- Luego utilizar **"curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - "** para añadir la clave de GPG para el repositorio oficial de Docker en el sistema y **"sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" "** para agregar el repositorio de Docker a las fuentes de apt.
+
+- Con el comando **"sudo apt update"** actualizamos el paquete de base de datos con los paquetes de Docker del repositorio agregado y finalmente instalamos docker mediante **"apt-cache policy docker-ce"**. 
+
+- Para comprobar si el Docker está funcionando se usa el comando **"sudo systemctl status docker"**, en él se puede observar si el servicio está activo y en ejecucción.
+
+- Iniciamos el docker de mysql-server mediante el comando **"docker run --rm -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=hotelo -p 3306:3306 -d mysql:8.0.22"**.
+
+- Para subir el .jar a la VM dentro de la aplicación de VirtualBox, click derecho a la VM que se va a utilizar y click en Configuración. En 'General' dentro de la pestaña de 'Avanzado' ponemos 'Compartir portapapeles' y 'Arrastra y Soltar' como Bidireccional ambos y arrastramos el .jar a la carpeta que queramos dentro de la VM.
+
+- Para iniciar la aplicación web del .jar utilizamos en el terminal de Linux el comando **"java -jar Hotelo-0.0.1-SNAPSHOT"** y para iniciar el servicio REST utilizamos el comando **"Hotelo_Rest-0.0.1-SNAPSHOT"** en otro terminal.
+
