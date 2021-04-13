@@ -22,15 +22,15 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 
 - Mostrar actividades de los hoteles.
 
-- Observar tipos de habitaciones que contengan los hoteles y sus servicios.
-
-- Consultar el número de reservas disponibles de los hoteles.
+-Inicio Sesión y Crear Usuario
 
 # Parte privada de la aplicación web:
 
 - Consultar información privada del huésped y sus reservas.
 
 - Hacer una reserva en un hotel.
+
+- Crear Actividades, Hoteles y habitaciones
 
 # Servicio interno:
 
