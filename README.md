@@ -22,7 +22,7 @@ La aplicación web consiste en una web de búsqueda y reserva de habitaciones de
 
 - Mostrar actividades de los hoteles.
 
--Inicio Sesión y Crear Usuario
+- Inicio Sesión y Crear Usuario
 
 # Parte privada de la aplicación web:
 
