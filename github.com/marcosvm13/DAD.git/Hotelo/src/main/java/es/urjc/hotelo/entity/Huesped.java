@@ -1,5 +1,6 @@
 package es.urjc.hotelo.entity;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Huesped {
+@RedisHash("Huesped")
+public class Huesped implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

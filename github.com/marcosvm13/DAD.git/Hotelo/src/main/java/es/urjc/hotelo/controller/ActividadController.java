@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import es.urjc.hotelo.entity.Hotel;
 import es.urjc.hotelo.repository.ActividadHotelRepository;
 
 import es.urjc.hotelo.repository.HotelRepository;
+import es.urjc.hotelo.servicios.HotelService;
+import es.urjc.hotelo.servicios.ImplementacionHotelService;
 
 
 
@@ -31,7 +35,10 @@ public class ActividadController {
 	
 	@Autowired 
 	private ActividadHotelRepository actividades ;
-	 
+	
+	@Autowired
+	private ImplementacionHotelService service ;
+	
 	@RequestMapping("/principalActividades")
 	public String principalActividades(Model model, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
@@ -40,14 +47,14 @@ public class ActividadController {
 		return "Principal2";
 	}
 	
-	
+
 	@GetMapping("/actividad/{id}")
 	public String actividad(Model model, Optional<ActividadHotel> actividad, @PathVariable long id, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		actividad = actividades.findById(id);
 		model.addAttribute("actividad", actividad.get());
-		return "actividad";
+		return "Actividad";
 	}
 	
 	
@@ -58,10 +65,9 @@ public class ActividadController {
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "InsertarActividad";
 	}
-	
-	
+
 	@PostMapping("/actividadCreada")
-	public String creadoActividad(Model model, @RequestParam String nombre, @RequestParam String aforo, @RequestParam String descripcion, @RequestParam(required = false) String[] hotelesActividad, HttpServletRequest request) {
+	public String creadoActividad(Model model, @RequestParam ActividadHotel a, @RequestParam(required = false) String[] hotelesActividad, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		if(hotelesActividad == null) {
@@ -70,7 +76,7 @@ public class ActividadController {
 			return "InsertarHotel";
 		}
 		
-		ActividadHotel a = new ActividadHotel(nombre, descripcion, Integer.parseInt(aforo));
+		//ActividadHotel a = new ActividadHotel(nombre, descripcion, Integer.parseInt(aforo));
 		
 		for(String h: hotelesActividad) {
 			
@@ -91,7 +97,7 @@ public class ActividadController {
 	public String nuevaActividad(Model model, @PathVariable Long id, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel h = hoteles.findById(id).get();
+		Hotel h = service.findById(id);
 		model.addAttribute("nombreHotel", h.getNombreHotel());
 		model.addAttribute("id", h.getId());
 		List<ActividadHotel> actividadLista = new LinkedList<>();
@@ -109,7 +115,7 @@ public class ActividadController {
 	public String actividadAyadida(Model model, @PathVariable Long id,  @RequestParam(required = false) String[] actividadesHotel, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel h = hoteles.findById(id).get();
+		Hotel h = service.findById(id);
 		if(actividadesHotel != null) {
 			for(String a: actividadesHotel) {
 				ActividadHotel act1= actividades.findByNombre(a);
@@ -117,10 +123,11 @@ public class ActividadController {
 				act1.getHoteles().add(h);
 				actividades.save(act1);
 			}
+			service.updateHotel(h);
 			hoteles.save(h);
 		}
 		model.addAttribute("hotel", h);
-		return "hotel";
+		return "Hotel";
 	}
 	
 	

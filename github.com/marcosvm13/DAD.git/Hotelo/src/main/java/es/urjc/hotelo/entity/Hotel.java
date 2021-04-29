@@ -1,19 +1,31 @@
 package es.urjc.hotelo.entity;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Hotel {
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.data.redis.core.RedisHash;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.urjc.hotelo.controller.HotelView;
+
+@Entity
+@RedisHash("Hotel")
+public class Hotel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -24,19 +36,22 @@ public class Hotel {
 	 * Lista de habitaciones
 	 * Actividades
 	 */
-	
+	@JsonView(Views.Public.class)
 	private String nombreHotel;
-	
+	@JsonView(Views.Public.class)
 	private String localidad;
-	
+	@JsonView(Views.Public.class)
 	private String direccion;
-	 
-	@OneToMany(mappedBy="hotel", cascade = CascadeType.ALL, orphanRemoval = true) 
+	
+	@OneToMany(mappedBy="hotel", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER) 
+	@JsonIgnoreProperties("hotel")
 	private List<Habitacion> habitacion;
 	
-	@ManyToMany(mappedBy="hoteles",  cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToMany(mappedBy="hoteles",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JsonIgnoreProperties("hoteles")
 	private List<ActividadHotel> actividadHotel;
-
+	@JsonView(Views.Public.class)
 	private int estrellas;
 
 	public Hotel() {

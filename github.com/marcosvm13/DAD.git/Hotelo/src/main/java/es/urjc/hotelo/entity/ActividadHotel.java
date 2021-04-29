@@ -1,15 +1,23 @@
 package es.urjc.hotelo.entity;
 
+import java.io.Serializable;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.springframework.data.redis.core.RedisHash;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class ActividadHotel{
+@RedisHash("ActividadHotel")
+public class ActividadHotel implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +37,7 @@ public class ActividadHotel{
 	private int plazas;
 	
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Hotel> hoteles;
 	
 	public ActividadHotel() {

@@ -2,10 +2,7 @@ package es.urjc.hotelo.configuration;
 
 import java.security.SecureRandom;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -47,7 +44,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				"/hotel/{id}", 
 				"/actividad/{id}", 
 				"/login", 
-				"/loginerror" ).permitAll();
+				"/loginerror",
+				"/crearHuesped",
+				"/signup").permitAll();
 
 		
 		// Private pages (all other pages) 

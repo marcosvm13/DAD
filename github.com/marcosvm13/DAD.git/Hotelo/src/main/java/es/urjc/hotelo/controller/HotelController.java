@@ -1,9 +1,7 @@
 package es.urjc.hotelo.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
 
 
 import javax.annotation.PostConstruct;
@@ -19,16 +17,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.annotation.JsonView;
 
 import es.urjc.hotelo.entity.ActividadHotel;
 import es.urjc.hotelo.entity.Habitacion;
 import es.urjc.hotelo.entity.Hotel;
-import es.urjc.hotelo.entity.Huesped;
 
+import es.urjc.hotelo.entity.Huesped;
+import es.urjc.hotelo.entity.Views;
 import es.urjc.hotelo.repository.ActividadHotelRepository;
 import es.urjc.hotelo.repository.HabitacionRepository;
 import es.urjc.hotelo.repository.HotelRepository;
 import es.urjc.hotelo.repository.HuespedRepository;
+
+import es.urjc.hotelo.servicios.ImplementacionHotelService;
 
 
 @Controller
@@ -48,6 +50,9 @@ public class HotelController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private ImplementacionHotelService service;
 	 
 	@PostConstruct
 	public void init() {
@@ -59,8 +64,8 @@ public class HotelController {
 		Hotel h3 = new Hotel("Tercer hotel", "C/ 9º B", "Cadiz",3);
 		Hotel h4 = new Hotel("Cuarto hotel", "C/ asdasdas", "Madrid", 4);
 		
-		Huesped usuario1 = new Huesped("user", "Apellido1" , 111111111, "huesped1@gmail.com", null, passwordEncoder.encode("pass"), "USER");
-		Huesped usuario2 = new Huesped("admin", "ApellidoAdmin" , 695596728, "adminSecreto@gmail.com", null, passwordEncoder.encode("adminpass"), "USER", "ADMIN");
+		Huesped usuario1 = new Huesped("user", "Apellido1" , 111111111, "davidpayanca@gmail.com", null, passwordEncoder.encode("pass"), "USER");
+		Huesped usuario2 = new Huesped("admin", "ApellidoAdmin" , 695596728, "davidpayanca@gmail.com", null, passwordEncoder.encode("adminpass"), "USER", "ADMIN");
 		
 		huespedes.save(usuario1);
 		huespedes.save(usuario2);
@@ -93,14 +98,14 @@ public class HotelController {
 		return "Principal";
 	}
 		
-	
+	@JsonView(Views.Public.class)
 	@GetMapping("/hotel/{id}")
-	public String hotel(Model model, Optional<Hotel> hotel, @PathVariable long id,  HttpServletRequest request) {
+	public String hotel(Model model, Hotel hotel, @PathVariable long id,  HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		hotel = hoteles.findById(id);
-		model.addAttribute("hotel", hotel.get());
-		return "hotel";
+		hotel = service.findById(id);
+		model.addAttribute("hotel", hotel);
+		return "Hotel";
 	}
 	
 	
@@ -126,6 +131,7 @@ public class HotelController {
 				
 			}
 		}
+		service.updateHotel(h);
 		hoteles.save(h);
 		model.addAttribute("nombreHotel", h.getNombreHotel());
 		model.addAttribute("id", h.getId());		
@@ -137,13 +143,14 @@ public class HotelController {
 	public String eliminarHotel(Model model, @PathVariable Long id, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel h = hoteles.findById(id).get();
+		Hotel h = service.findById(id);
 		for(ActividadHotel a: h.getActividades()) {
 			a.getHoteles().remove(h);
 			
 		}
 		h.getActividades().clear();
 		hoteles.save(h);
+		service.deleteHotel(id);
 		hoteles.deleteById(id);
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
