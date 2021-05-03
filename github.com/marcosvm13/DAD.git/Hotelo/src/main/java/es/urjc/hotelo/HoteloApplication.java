@@ -24,7 +24,7 @@ import es.urjc.hotelo.entity.Hotel;
 
 
 @SpringBootApplication
-//@EnableHazelcastHttpSession
+@EnableHazelcastHttpSession
 public class HoteloApplication {
 	
 	@Bean
@@ -48,7 +48,7 @@ public class HoteloApplication {
 		return redisTemplate;
 	}
 
-	/*
+
 	@Bean
 	public Config config() {
 		
@@ -61,7 +61,7 @@ public class HoteloApplication {
 		return config;
 	}
 	
-	*/
+
 	
 	
 	
