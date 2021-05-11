@@ -1,0 +1,5 @@
+com\dad\hotelo_rest\Rest\EmailRest.class
+com\dad\hotelo_rest\Rest\EmailService.class
+com\dad\hotelo_rest\Hotelo2Application.class
+com\dad\hotelo_rest\Rest\EmailPort.class
+com\dad\hotelo_rest\Rest\EmailBody.class
