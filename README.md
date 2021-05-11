@@ -196,3 +196,17 @@ Página que crea una nueva actividad dentro de la base de datos de la aplicació
 
 - Para iniciar la aplicación web del .jar utilizamos en el terminal de Linux el comando **"java -jar Hotelo-0.0.1-SNAPSHOT"** y para iniciar el servicio REST utilizamos el comando **"Hotelo_Rest-0.0.1-SNAPSHOT"** en otro terminal.
 
+
+# Interfaz del servicio interno
+
+El servicio interno de esta aplicación sirve para mandar un correo de confirmación al usuario que solicita o cancela una reserva. La URL de entrada al servicio interno es http://hoteloRest:8090/email/send.
+
+Como parámetro se manda un objeto de la clase Correo, cuyo constructor es *Correo(String email, String content, String subject)*, donde *email* es la cuenta de correo electrónico a la que se manda el correo, *content* es el mensaje que se manda en el correo y *subject* es el asunto del correo. Un ejemplo de su uso en la aplicación
+```java
+String url="http://hoteloRest:8090/email/send";
+//usu es de la clase Huesped
+HttpEntity<Correo> re = new HttpEntity<>(new Correo(usu.get().getCorreo(), "Buenos dias " + usu.get().getNombreHuesped() + ".\n Reserva realizada para los dias " + reserva.getFechaDeEntrada() + " a " + reserva.getFechaDeSalida()+ " en la habitacion " + reserva.getHabitacion().getNumero() + " de tamayo " + reserva.getHabitacion().getTamayo() + ", del hotel " + reserva.getHabitacion().getHotel().getNombreHotel() + ", en la direccion "+ reserva.getHabitacion().getHotel().getDireccion()+ " con numero de referencia "+ reserva.getId() +".\n Esperemos que disfrute, \n Un saludo.","Reserva Hotelo"));	
+
+restTemplate.postForEntity(url, re, String.class);
+```
+El servicio devuelve un booleano que indica si se ha mandado el correo correctamente.
