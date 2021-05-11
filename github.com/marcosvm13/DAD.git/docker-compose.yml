@@ -1,0 +1,97 @@
+version:  '3'
+
+services:
+    hotelo-app-container1:
+        image: hotelo:latest
+        build: ./Hotelo
+        container_name: Hotelo1
+        command: "--server.port=8091"
+        ports:
+            - 8091:8091
+        depends_on:
+            - hotelo-app-container2
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hotelo
+            - SPRING_REDIS_HOST=redis
+            - NODES=hotelo-app-container2
+
+
+        links:
+            - redis
+            - db
+            
+            
+        restart: unless-stopped
+        
+        
+                
+                
+    hotelo-app-container2:
+        image: hotelo:latest
+        build: ./Hotelo
+        container_name: Hotelo2
+        command: "--server.port=8092"
+        
+        ports:
+            - 8092:8092
+        
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hotelo
+            - SPRING_REDIS_HOST=redis
+            - SPRING_JPA_HIBERNATE_DLL-AUTO = update
+            
+
+        links:
+            - redis
+            - db
+            
+            
+        restart: unless-stopped
+        
+        
+                             
+    hotelo-rest-app-container:
+        image: hotelo-rest:latest
+        build: ./Hotelo_Rest
+        ports:
+            - 8090:8090
+        
+
+    db:
+        image: mysql:8.0.22
+        environment:
+            MYSQL_DATABASE: 'hotelo'
+            MYSQL_ROOT_PASSWORD: '1234'
+            
+        ports: 
+            - 3306:3306
+        
+    redis:
+        container_name: redis
+        image: "redis"
+        hostname: redis
+        environment:
+           - ALLOW_EMPTY_PASSWORD=yes
+           - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+        ports:
+            - 6379:6379
+        volumes:
+            - ./redis/redis.conf:/redis.conf
+        command: [ "redis-server", "/redis.conf" ]
+        
+                
+    haproxy:
+        image: haproxy:1.9.6
+        
+        links:
+            - hotelo-app-container1
+            - hotelo-app-container2
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - "./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+            - "./haproxy/xip.io.pem:/etc/haproxy/xip.io.pem"
+        
+        
+        restart: unless-stopped
