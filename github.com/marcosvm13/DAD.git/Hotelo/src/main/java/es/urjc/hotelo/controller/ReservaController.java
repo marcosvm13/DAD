@@ -88,7 +88,7 @@ public class ReservaController {
 		
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url="http://localhost:8090/email/send";
+		String url="http://hotelo-rest-app-container:8090/email/send";
 		
 		HttpEntity<Correo> re = new HttpEntity<>(new Correo(usu.get().getCorreo(), "Buenos dias " + usu.get().getNombreHuesped() + ".\n Reserva realizada para los dias " + reserva.getFechaDeEntrada() + " a " + reserva.getFechaDeSalida()+ " en la habitacion " + reserva.getHabitacion().getNumero() + " de tamayo " + reserva.getHabitacion().getTamayo() + ", del hotel " + reserva.getHabitacion().getHotel().getNombreHotel() + ", en la direccion "+ reserva.getHabitacion().getHotel().getDireccion()+ " con numero de referencia "+ reserva.getId() +".\n Esperemos que disfrute, \n Un saludo.","Reserva Hotelo"));	
 		restTemplate.postForEntity(url, re, String.class);
@@ -131,7 +131,7 @@ public class ReservaController {
 		
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url="http://localhost:8090/email/send";
+		String url="http://hotelo-rest-app-container:8090/email/send";
 		
 		HttpEntity<Correo> re = new HttpEntity<>(new Correo(usu.get().getCorreo(), "Buenos dias " + usu.get().getNombreHuesped() + ".\n Se ha cancelado su reserva para los dias " + r.getFechaDeEntrada() + " a " + r.getFechaDeSalida()+ " con numero de referencia " + r.getId() +".\n", "Cancelación de Reserva"));
 		restTemplate.postForEntity(url, re, String.class);

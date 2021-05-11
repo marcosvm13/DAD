@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -51,6 +52,7 @@ public class Habitacion implements Serializable{
 	private String tamayo;
 	
 	@JsonView(Views.Habitacion.class)
+	@Column(length = 3000)
 	private HashSet<LocalDate> ocupacion;
 	
 	//private List<MultipartFile> imagenes;

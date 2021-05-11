@@ -4,6 +4,7 @@ package es.urjc.hotelo;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,6 +20,8 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
+import com.hazelcast.config.NetworkConfig;
+import com.hazelcast.config.TcpIpConfig;
 
 import es.urjc.hotelo.entity.Hotel;
 
@@ -27,11 +30,14 @@ import es.urjc.hotelo.entity.Hotel;
 @EnableHazelcastHttpSession
 public class HoteloApplication {
 	
+	@Value("${nodes}")
+	private String nodes;
+	
 	@Bean
 	public RedisStandaloneConfiguration redisStandaloneConfiguration() {
 		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-		config.setHostName("localhost");
-		config.setPort(6379);
+		config.setHostName("redis");
+        config.setPort(6379);
 		return config;
 	}
 	
@@ -45,6 +51,7 @@ public class HoteloApplication {
 		RedisTemplate<String, Hotel> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(jedisConnectionFactory());
 		redisTemplate.setEnableTransactionSupport(true);
+		
 		return redisTemplate;
 	}
 
@@ -54,10 +61,17 @@ public class HoteloApplication {
 		
 		Config config = new Config();
 		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
+		
 		joinConfig.getMulticastConfig().setEnabled(false);
 		
-		joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
-		
+		TcpIpConfig tcpIpConf = joinConfig.getTcpIpConfig();
+		if(nodes.isEmpty()) {
+			tcpIpConf.addMember("127.0.0.1");
+		}
+		else {
+			tcpIpConf.addMember(nodes);			
+		}	
+		tcpIpConf.setEnabled(true);
 		return config;
 	}
 	
