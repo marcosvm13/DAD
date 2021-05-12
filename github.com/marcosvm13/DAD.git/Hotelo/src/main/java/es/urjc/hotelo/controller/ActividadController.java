@@ -67,7 +67,7 @@ public class ActividadController {
 	}
 
 	@PostMapping("/actividadCreada")
-	public String creadoActividad(Model model, @RequestParam ActividadHotel a, @RequestParam(required = false) String[] hotelesActividad, HttpServletRequest request) {
+	public String creadoActividad(Model model, @RequestParam String nombre, @RequestParam String aforo, @RequestParam String descripcion, @RequestParam(required = false) String[] hotelesActividad, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		if(hotelesActividad == null) {
@@ -76,7 +76,7 @@ public class ActividadController {
 			return "InsertarHotel";
 		}
 		
-		//ActividadHotel a = new ActividadHotel(nombre, descripcion, Integer.parseInt(aforo));
+		ActividadHotel a = new ActividadHotel(nombre, descripcion, Integer.parseInt(aforo));
 		
 		for(String h: hotelesActividad) {
 			
@@ -97,7 +97,7 @@ public class ActividadController {
 	public String nuevaActividad(Model model, @PathVariable Long id, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel h = service.findById(id);
+		Hotel h = hoteles.findById(id).get();		
 		model.addAttribute("nombreHotel", h.getNombreHotel());
 		model.addAttribute("id", h.getId());
 		List<ActividadHotel> actividadLista = new LinkedList<>();
@@ -115,7 +115,7 @@ public class ActividadController {
 	public String actividadAyadida(Model model, @PathVariable Long id,  @RequestParam(required = false) String[] actividadesHotel, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel h = service.findById(id);
+		Hotel h = hoteles.findById(id).get();		
 		if(actividadesHotel != null) {
 			for(String a: actividadesHotel) {
 				ActividadHotel act1= actividades.findByNombre(a);
@@ -138,6 +138,7 @@ public class ActividadController {
 		ActividadHotel a = actividades.findById(id).get();
 		for(Hotel h: a.getHoteles()) {
 			h.getActividades().remove(a);
+			service.updateHotel(h);
 			hoteles.save(h);
 		}
 		a.getHoteles().clear();

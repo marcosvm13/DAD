@@ -60,7 +60,7 @@ public class HotelController {
 	if(actividades.findByNombre("Actividad Hotel")==null) {
 		ActividadHotel ah1 = new ActividadHotel("Actividad Hotel","Descripcion de actividad hotel",10);
 		
-			Hotel h1 = new Hotel("Barata, barata", "C/Hola", "Valencia", 1);
+			Hotel h1 = new Hotel("Barata barata", "C/Hola", "Valencia", 1);
 			Hotel h2 = new Hotel("Pago bien", "C/ Ni idea", "Barcelona", 2);
 			Hotel h3 = new Hotel("Tercer hotel", "C/ 9º B", "Cadiz",3);
 			Hotel h4 = new Hotel("Cuarto hotel", "C/ asdasdas", "Madrid", 4);

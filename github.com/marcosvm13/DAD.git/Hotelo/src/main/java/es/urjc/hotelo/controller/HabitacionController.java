@@ -50,7 +50,7 @@ public class HabitacionController {
 		dateF = LocalDate.parse(fechaF, format);
 		HashMap<String, Habitacion> tipos = new HashMap<>();
 			
-		for(Habitacion h: service.findById(id).getHabitaciones()) {
+		for(Habitacion h: hoteles.findById(id).get().getHabitaciones()) {
 			HashSet<LocalDate> ocupacion= h.getOcupacion();
 			boolean esta = false;
 			for(LocalDate d: dateI.datesUntil(dateF).collect(Collectors.toList())) {
@@ -79,7 +79,7 @@ public class HabitacionController {
 	public String nuevaHabitacionTerminar(Model model, @PathVariable Long id,  @RequestParam String numero, @RequestParam String tamayo, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel hotel = service.findById(id);
+		Hotel hotel = hoteles.findById(id).get();
 		Habitacion h = new Habitacion(Integer.parseInt(numero), hotel, tamayo);
 		hotel.getHabitaciones().add(h);
 		habitaciones.save(h);
@@ -92,10 +92,11 @@ public class HabitacionController {
 	public String nuevaHabitacionSeguir(Model model, @PathVariable Long id,  @RequestParam String numero, @RequestParam String tamayo, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel hotel = service.findById(id);
+		Hotel hotel = hoteles.findById(id).get();
 		Habitacion h = new Habitacion(Integer.parseInt(numero), hotel, tamayo);
 		hotel.getHabitaciones().add(h);
 		habitaciones.save(h);
+		service.updateHotel(hotel);
 		model.addAttribute("nombreHotel", hotel.getNombreHotel());
 		model.addAttribute("id", hotel.getId());
 		return "AyadirHabitaciones";
@@ -106,7 +107,8 @@ public class HabitacionController {
 	public String nuevaHabitacion2(Model model, @PathVariable Long id, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Hotel h = service.findById(id);
+		Hotel h = hoteles.findById(id).get();
+		
 		model.addAttribute("nombreHotel", h.getNombreHotel());
 		model.addAttribute("id", h.getId());
 		return "AyadirHabitaciones";
@@ -117,8 +119,9 @@ public class HabitacionController {
 	public String eliminarActividad(Model model, @PathVariable Long id, HttpServletRequest request) {
 		model.addAttribute("user", request.isUserInRole("USER"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		Habitacion a = habitaciones.findById(id).get();
+		Habitacion a = habitaciones.findById(id).get();		
 		Hotel h = a.getHotel();
+		service.updateHotel(h);
 		habitaciones.deleteById(id);
 		model.addAttribute("hotel", h);
 		return "Hotel";

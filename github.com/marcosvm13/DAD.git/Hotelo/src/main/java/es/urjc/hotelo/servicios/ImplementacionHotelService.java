@@ -3,6 +3,8 @@ package es.urjc.hotelo.servicios;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,8 +35,11 @@ public class ImplementacionHotelService implements HotelService{
 	        final ValueOperations<String, Hotel> operations = redisTemplate.opsForValue();
 	        final boolean hasKey = redisTemplate.hasKey(key);
 	        if (hasKey) {
+	        	
 	            final Hotel hotel = operations.get(key);
-	            System.out.println("HA FUNCIONADO LA CACHE");
+	            Logger logger = LoggerFactory.getLogger(ImplementacionHotelService.class);
+	            logger.info("HA FUNCIONADO LA CACHE: " + hotel.getNombreHotel());
+	            
 	            return hotel;
 	        }
 	        final Optional<Hotel> hotel = hotelRepository.findById(id);
