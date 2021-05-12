@@ -1,0 +1,106 @@
+
+{{>Cabecera}}
+
+<main>
+	
+	<br>
+	<div class="container p-5">
+	{{#hotel}}
+	
+	<h1>{{nombreHotel}}</h1>
+	<h4>Direccion: {{direccion}}, {{localidad}}</h4>
+	<br>
+	<p>Actividades</p>
+	
+	<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
+	
+		{{#actividades}}
+		
+		<div class="col-md-4">
+        	<div class="card mb-4 box-shadow" style="width: 20rem;">
+            	<div class="card-body">
+				
+			    <h5 class="card-title">{{nombre}}</h5>
+			    <h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
+			    <p class="card-text">{{descripcion}}</p>			   
+			    <a href="/actividad/{{id}}" class="card-link">Info</a> 
+			    
+		    	</div>
+			</div>
+		</div>
+
+		{{/actividades}}
+		
+		{{^actividades}}
+			<p class="card-subtitle mb-2 text-muted">Este hotel no cuenta con actividades.</p>
+		{{/actividades}}
+		
+		</div></div></div>
+		
+	<br>
+	<p>Habitaciones</p>
+
+	<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
+		
+		{{#habitaciones}}
+		
+		<div class="col-md-4">
+        	<div class="card mb-4 box-shadow" style="width: 20rem;">
+            	<div class="card-body">
+				
+			    <h5 class="card-title">No. {{numero}}</h5>
+			    <p class="card-text">{{tamayo}}</p>
+			    {{#admin}}
+			    <a href="/eliminarHabitacion/{{id}}" class="card-link text-danger">Eliminar</a> 
+		    	{{/admin}}
+		    	</div>
+			</div>
+		</div>
+		
+		{{/habitaciones}}
+		
+		{{^habitaciones}}
+			<p class="card-subtitle mb-2 text-muted">Este hotel sorprendentemente no cuenta con habitaciones.</p>
+		{{/habitaciones}}
+	
+		</div></div></div>
+	
+	{{/hotel}}
+	
+	<br><br>
+	<div class="d-flex justify-content-between align-items-center">
+	{{#admin}}
+	<form action="/nuevaHabitacion2/{{id}}" method="get">
+		<input class="btn btn-sm btn-outline-secondary"  type="submit"  value="Nueva Habitación">
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+	</form>
+
+	<form action="/nuevaActividad/{{id}}" method="get">
+		<input class="btn btn-sm btn-outline-secondary"  type="submit"  value="Nueva Actividad">
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+	</form>
+{{/admin}}
+{{#user}}	
+	<form action="/reserva/{{id}}" method="get">
+		<input class="btn btn-sm btn-outline-secondary"  type="submit" value="Reservar">
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+	</form>
+{{/user}}
+{{#admin}}
+	<form action="/eliminarHotel/{{id}}" method="get">
+		<input class="btn btn-danger"  type="submit" value="Eliminar">
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+	</form>
+{{/admin}}
+  	<form action="/" method="get">
+		<input class="button"  type="submit" value="Volver a inicio">
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+	</form>
+	</div>
+	</div>
+	
+{{>Pie}}

@@ -1,0 +1,48 @@
+
+{{>Cabecera}}
+
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Encuentra el hotel ideal</h1>
+        <p class="lead text-muted">Busca ofertas en hoteles, casas y en toda clase de establecimientos.</p>
+        <p>
+          <a href="/principalHoteles" class="btn btn-primary my-2">Ver Hoteles</a>
+          
+        </p>
+      </div>
+    </div>
+  </section>
+  
+	<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
+        	
+		{{#actividades}}
+		
+			<div class="col-md-4">
+        		<div class="card mb-4 box-shadow" style="width: 20rem;">
+            		<div class="card-body">
+				
+			    	<h5 class="card-title">{{nombre}}</h5>
+			     	<h6 class="card-subtitle mb-2 text-muted">Plazas: {{plazas}}</h6>
+			    	<p class="card-text">{{descripcion}}</p>
+			    
+			    	<a href="/actividad/{{id}}" class="card-link">Info</a> 
+			    
+		    		</div>
+              	</div>
+            </div>
+
+	{{/actividades}}
+		
+        </div>
+      </div>
+	</div>
+	
+<br><br>
+
+{{>Pie}}

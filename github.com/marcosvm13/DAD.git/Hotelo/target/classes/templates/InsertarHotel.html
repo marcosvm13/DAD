@@ -1,0 +1,47 @@
+
+{{>Cabecera}}
+
+	<br>
+	<div class="container p-5">
+
+	<h1 class="text-center">Inserte un nuevo Hotel</h1>
+<div class="row ">
+			<div class="col-sm-4 col-sm-offset-3 mx-auto" >
+	<form action="/hotelCreado" method="post">
+		<div class="form-group">
+			<label for="nombre">Nombre</label> 
+			<input type="text" class="form-control" id="nombre" name="nombre" required>
+		</div>
+		<div class="form-group">
+			<label for="localidad">Localidad</label> <input
+				type="text" class="form-control" id="localidad" name="localidad" required>
+		</div>
+		<div class="form-group">
+			<label for="direccion">Dirección</label> 
+			<input type="text" class="form-control" id="direccion" name="direccion" required>
+		</div>
+		
+			<div class="form-group">
+			<label for="estrellas">Estrellas</label> 
+			<input type="number" min="0" max="5" class="form-control" id="estrellas" name="estrellas" required>
+		</div>
+		<br>
+		<p>Actividades:</p>
+		 {{#actividades}}
+		<div class="form-check form-switch">
+  			<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="actividadesHotel" value="{{nombre}}">
+ 			<label class="form-check-label" for="flexSwitchCheckDefault">{{nombre}}</label>
+		</div>
+		{{/actividades}}
+		<br>
+		<div class="col-sm-1 col-sm-offset-3 mx-auto" >
+			<input class="text-center" type='submit' name='enviar' value='Enviar' />
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+		</div>
+	</form>
+	</div> </div> </div>
+	</body>
+</html>
+
+
+{{>Pie}}

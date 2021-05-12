@@ -1,0 +1,32 @@
+
+{{>Cabecera}}
+
+
+<main>
+ 
+<br>
+<div class="container p-5">
+
+	{{#mal}}
+		<h2>Habitación ya no disponible por favor vuelva a intentarlo.</h2>
+	{{/mal}}
+	
+	{{^mal}}
+		{{#reserva}}
+		<h2> Confirmacion de la reserva  </h2><br>
+	
+		<h4>Fecha de entrada: {{fechaDeEntrada}}</h4>
+		<h4>Fecha de salida: {{fechaDeSalida}}</h4>
+		
+		{{/reserva}}
+	{{/mal}}
+
+<br><br>
+  	<form action="/" method="get">
+		<input class="button"  type="submit" value="Volver a inicio">
+		<input type="hidden" name="_csrf" value="{{token}}"/>
+	</form>
+</div>
+
+
+{{>Pie}}

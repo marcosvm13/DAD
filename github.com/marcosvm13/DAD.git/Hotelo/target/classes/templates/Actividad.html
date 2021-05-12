@@ -1,0 +1,62 @@
+
+{{>Cabecera}}
+
+<main>
+
+		<br>	
+		<div class="container p-5">
+		
+		{{#actividad}}
+		<h1>{{nombre}}</h1>
+		<h3>Aforo: {{plazas}}</h3>
+		<h5>{{descripcion}}</h5><br>
+		<p>Hoteles: <p>	
+		
+		<div class="album py-5 bg-light">
+        <div class="container">
+        	<div class="row">
+		
+			{{#hoteles}}
+		
+			<div class="col-md-4">
+              	<div class="card mb-4 box-shadow" style="width: 20rem;">
+                	<div class="card-body">
+				
+			    	<h5 class="card-title">{{nombreHotel}}</h5>
+			     	<h6 class="card-subtitle mb-2 text-muted">{{direccion}}</h6>
+			    	<p class="card-text">{{estrellas}}</p>
+
+			    	<a href="/hotel/{{id}}" class="card-link">Info</a> 
+			   
+		    		</div>
+		    	</div>
+		    </div>
+		
+			{{/hoteles}}
+			
+			</div>
+      	</div>
+		</div>
+			
+		{{/actividad}}
+		
+		<br><br>
+		<div class="d-flex justify-content-between align-items-center">
+		{{#admin}}
+			<form action="/eliminarActividad/{{id}}" method="get">
+				<input class="btn btn-danger"  type="submit" value="Eliminar">
+				<input type="hidden" name="_csrf" value="{{token}}"/>
+			</form>
+		{{/admin}}
+		<form action="/principalActividades" method="get">
+			<input class="button"  type="submit" value="Volver a inicio">
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+		</form>
+		</div>
+		
+	</div>
+
+  
+</main>
+</body>
+</html>
