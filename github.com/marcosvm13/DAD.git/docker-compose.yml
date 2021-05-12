@@ -8,13 +8,10 @@ services:
         command: "--server.port=8091"
         ports:
             - 8091:8091
-        depends_on:
-            - hotelo-app-container2
+
         environment:
             - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hotelo
             - SPRING_REDIS_HOST=redis
-            - NODES=hotelo-app-container2
-
 
         links:
             - redis
@@ -31,7 +28,8 @@ services:
         build: ./Hotelo
         container_name: Hotelo2
         command: "--server.port=8092"
-        
+        depends_on:
+             - hotelo-app-container1
         ports:
             - 8092:8092
         
@@ -39,8 +37,6 @@ services:
             - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hotelo
             - SPRING_REDIS_HOST=redis
             - SPRING_JPA_HIBERNATE_DLL-AUTO = update
-            
-
         links:
             - redis
             - db
