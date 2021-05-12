@@ -1,0 +1,28 @@
+{{>Cabecera}}
+
+	<br>
+	<div class="container p-5">
+
+	<h1 class="text-center">Inserte una nueva actividad al Hotel {{nombreHotel}}</h1>
+<div class="row ">
+			<div class="col-sm-4 col-sm-offset-3 mx-auto" >
+	<form action="/actividadAyadida/{{id}}" method="post">
+		<p>Actividades:</p>
+		 {{#actividades}}
+		<div class="form-check form-switch">
+  			<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="actividadesHotel" value="{{nombre}}">
+ 			<label class="form-check-label" for="flexSwitchCheckDefault">{{nombre}}</label>
+		</div>
+		{{/actividades}}
+		<br>
+		<div class="col-sm-1 col-sm-offset-3 mx-auto" >
+			<input class="text-center" type='submit' name='enviar' value='Enviar' />
+			<input type="hidden" name="_csrf" value="{{token}}"/>
+		</div>
+	</form>
+	</div> </div> </div>
+	</body>
+</html>
+
+
+{{>Pie}}
