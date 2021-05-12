@@ -217,3 +217,11 @@ El servicio devuelve un booleano que indica si se ha mandado el correo correctam
 
 ![Infraestructura de la aplicación](https://user-images.githubusercontent.com/61868600/117839470-8b234c80-b27b-11eb-8d1f-e7955ec51b47.png)
 
+# Actualización del diagrama de clases y templates
+![Redis](https://user-images.githubusercontent.com/61940472/117953525-603a0680-b316-11eb-9b69-e15c693b846d.jpg)
+
+# Desplegar la aplicación con Docker
+
+1) Construir las aplicaciones y poner el .jar dentro de una carpeta llamada target con los nombres hotelo y hotelo_rest
+2) Posicionarse sobre la raíz del proyecto DAD donde se encuentra el docker-compose.yml
+3) Ejecutar el comando docker compose up
