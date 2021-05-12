@@ -4,7 +4,6 @@ package es.urjc.hotelo;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -30,14 +29,12 @@ import es.urjc.hotelo.entity.Hotel;
 @EnableHazelcastHttpSession
 public class HoteloApplication {
 	
-	@Value("${nodes}")
-	private String nodes;
 	
 	@Bean
 	public RedisStandaloneConfiguration redisStandaloneConfiguration() {
 		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
 		config.setHostName("redis");
-        config.setPort(6379);
+        	config.setPort(6379);
 		return config;
 	}
 	
@@ -60,19 +57,15 @@ public class HoteloApplication {
 	public Config config() {
 		
 		Config config = new Config();
-		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
-		
-		joinConfig.getMulticastConfig().setEnabled(false);
-		
-		TcpIpConfig tcpIpConf = joinConfig.getTcpIpConfig();
-		if(nodes.isEmpty()) {
-			tcpIpConf.addMember("127.0.0.1");
-		}
-		else {
-			tcpIpConf.addMember(nodes);			
-		}	
-		tcpIpConf.setEnabled(true);
-		return config;
+   		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
+   		joinConfig.getMulticastConfig().setEnabled(false);
+   	
+
+		joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Arrays.asList(
+				    "hotelo-app-container2",
+				    "hotelo-app-container1"));
+   		 
+   		return config;
 	}
 	
 
