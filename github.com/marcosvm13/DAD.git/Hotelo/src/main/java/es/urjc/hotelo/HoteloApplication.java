@@ -34,7 +34,7 @@ public class HoteloApplication {
 	@Bean
 	public RedisStandaloneConfiguration redisStandaloneConfiguration() {
 		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-		config.setHostName("localhost");
+		config.setHostName("redis");
         	config.setPort(6379);
 		return config;
 	}

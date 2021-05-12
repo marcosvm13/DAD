@@ -153,7 +153,7 @@ public class HotelController {
 		}
 		h.getActividades().clear();
 		hoteles.save(h);
-		service.deleteHotel(id);
+		service.updateHotel(h);
 		hoteles.deleteById(id);
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";

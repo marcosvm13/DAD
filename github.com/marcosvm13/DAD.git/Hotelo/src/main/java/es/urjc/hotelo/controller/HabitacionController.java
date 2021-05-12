@@ -83,6 +83,7 @@ public class HabitacionController {
 		Habitacion h = new Habitacion(Integer.parseInt(numero), hotel, tamayo);
 		hotel.getHabitaciones().add(h);
 		habitaciones.save(h);
+		service.updateHotel(hotel);
 		model.addAttribute("hoteles", hoteles.findAll());
 		return "Principal";
 	}
@@ -121,10 +122,13 @@ public class HabitacionController {
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		Habitacion a = habitaciones.findById(id).get();		
 		Hotel h = a.getHotel();
+		h.getHabitaciones().remove(a);
+		hoteles.save(h);
+		
 		service.updateHotel(h);
-		habitaciones.deleteById(id);
-		model.addAttribute("hotel", h);
-		return "Hotel";
+		service.findById(h.getId());
+		model.addAttribute("hoteles", hoteles.findAll());
+		return "Principal";
 	}
 	
 }
