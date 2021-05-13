@@ -46,13 +46,19 @@ services:
         
         
                              
-    hotelo-rest-app-container:
+    hotelo-rest-app-container1:
         image: hotelo-rest:latest
         build: ./Hotelo_Rest
+        command: "--server.port=8088"
         ports:
-            - 8090:8090
+            - 8088:8088
         
-
+    hotelo-rest-app-container2:
+        image: hotelo-rest:latest
+        build: ./Hotelo_Rest
+        command: "--server.port=8089"
+        ports:
+            - 8089:8089
     db:
         image: mysql:8.0.22
         environment:
@@ -89,5 +95,17 @@ services:
             - "./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
             - "./haproxy/xip.io.pem:/etc/haproxy/xip.io.pem"
         
+        
+        restart: unless-stopped
+    haproxyR:
+        image: haproxy:1.9.6
+        
+        links:
+            - hotelo-rest-app-container1
+            - hotelo-rest-app-container2
+        ports:
+            - 8090:8090
+        volumes:
+            - "./haproxyR/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
         
         restart: unless-stopped
