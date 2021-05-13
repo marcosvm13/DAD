@@ -1,5 +1,12 @@
 # HOTELO
 
+#Video Presentación
+https://youtu.be/Sx86pIxVYMo
+
+Version Alternativa:
+- https://youtu.be/abcoDznvw9Q
+- https://youtu.be/LqoInzi1Y5k
+
 # Descripción de la web:
 
 La aplicación web consiste en una web de búsqueda y reserva de habitaciones de hoteles. En ella se mostrarán los hoteles pudiendo ver con cuantas habitaciones cuenta, si quedan reservas y las actividades que se pueden hacer en esos hoteles.
